@@ -46,6 +46,22 @@ public class DynamicArray<T> {
         return previousValue;
     }
 
+    @SuppressWarnings("unchecked")
+    public T remove(int index) {
+        checkIndex(index);
+
+        T removedValue = (T) elements[index];
+
+        for (int i = index; i < size - 1; i++) {
+            elements[i] = elements[i + 1];
+        }
+
+        size--;
+        elements[size] = null;
+
+        return removedValue;
+    }
+
     private void checkIndex(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(

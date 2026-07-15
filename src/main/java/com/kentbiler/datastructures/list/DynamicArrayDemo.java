@@ -7,12 +7,12 @@ public class DynamicArrayDemo {
 
         names.add("Aristotle");
         names.add("Menger");
+        names.add("Veatch");
 
-        String previousValue = names.set(1, "Veatch");
+        String removedValue = names.remove(1);
 
-        System.out.println("Previous value: " + previousValue);
-        System.out.println("Current value: " + names.get(1));
+        System.out.println("Removed value value: " + removedValue);
+        System.out.println("New value at index 1: " + names.get(1));
         System.out.println("Size: " + names.size());
-        System.out.println("Capacity: " + names.capacity());
     }
 }
