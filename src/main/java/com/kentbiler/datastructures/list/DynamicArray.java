@@ -36,6 +36,16 @@ public class DynamicArray<T> {
         return (T) elements[index];
     }
 
+    @SuppressWarnings("unchecked")
+    public T set(int index, T value) {
+        checkIndex(index);
+
+        T previousValue = (T) elements[index];
+        elements[index] = value;
+
+        return previousValue;
+    }
+
     private void checkIndex(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(
