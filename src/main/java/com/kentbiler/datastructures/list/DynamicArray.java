@@ -22,6 +22,10 @@ public class DynamicArray<T> {
     }
 
     public void add(T value) {
+        if (size == elements.length) {
+            grow();
+        }
+
         elements[size] = value;
         size++;
     }
@@ -38,5 +42,15 @@ public class DynamicArray<T> {
                 "Index: " + index + ", Size: " + size
             );
         }
+    }
+
+    private void grow() {
+        Object[] largerArray = new Object[elements.length * 2];
+
+        for (int i = 0; i < elements.length; i++) {
+            largerArray[i] = elements[i];
+        }
+
+        elements = largerArray;
     }
 }
