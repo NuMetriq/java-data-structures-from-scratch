@@ -12,4 +12,14 @@ class DynamicArrayTest {
 
         assertEquals(0, array.size());
     }
+
+    @Test
+    void addStoresElementAndIncreasesSize() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+
+        assertEquals(1, array.size());
+        assertEquals("Aristotle", array.get(0));
+    }
 }
