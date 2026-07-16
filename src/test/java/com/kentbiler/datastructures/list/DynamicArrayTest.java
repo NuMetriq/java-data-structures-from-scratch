@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 class DynamicArrayTest {
 
     @Test
@@ -61,5 +63,13 @@ class DynamicArrayTest {
         assertEquals("Menger", removedValue);
         assertEquals("Veatch", array.get(1));
         assertEquals(2, array.size());
+    }
+
+    @Test
+    void getThrowsExceptionForInvalidIndex() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        assertThrows(IndexOutOfBoundsException.class, () -> array.get(0));
+        assertThrows(IndexOutOfBoundsException.class, () -> array.get(-1));
     }
 }
