@@ -30,6 +30,25 @@ public class DynamicArray<T> {
         size++;
     }
 
+    public void add(int index, T value) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException(
+                "Index: " + index + ", Size: " + size
+            );
+        }
+
+        if (size == elements.length) {
+            grow();
+        }
+
+        for (int i = size; i > index; i--) {
+            elements[i] = elements[i - 1];
+        }
+
+        elements[index] = value;
+        size++;
+    }
+
     @SuppressWarnings("unchecked")
     public T get(int index) {
         checkIndex(index);

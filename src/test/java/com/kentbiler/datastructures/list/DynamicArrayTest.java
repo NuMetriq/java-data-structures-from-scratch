@@ -72,4 +72,19 @@ class DynamicArrayTest {
         assertThrows(IndexOutOfBoundsException.class, () -> array.get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> array.get(-1));
     }
+
+    @Test
+    void addAtIndexShiftsLaterElementsRight() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.add("Veatch");
+
+        array.add(1, "Menger");
+
+        assertEquals("Aristotle", array.get(0));
+        assertEquals("Menger", array.get(1));
+        assertEquals("Veatch", array.get(2));
+        assertEquals(3, array.size());
+    }
 }
