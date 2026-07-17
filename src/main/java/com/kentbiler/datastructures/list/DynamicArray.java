@@ -1,5 +1,7 @@
 package com.kentbiler.datastructures.list;
 
+import java.util.Objects;
+
 public class DynamicArray<T> {
 
     private Object[] elements;
@@ -97,5 +99,15 @@ public class DynamicArray<T> {
         }
 
         elements = largerArray;
+    }
+
+    public int indexOf(T value) {
+        for (int i = 0; i < size; i++) {
+            if (Objects.equals(elements[i], value)) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }

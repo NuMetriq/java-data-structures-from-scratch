@@ -87,4 +87,17 @@ class DynamicArrayTest {
         assertEquals("Veatch", array.get(2));
         assertEquals(3, array.size());
     }
+
+    @Test
+    void indexOfReturnsFirstMatchingIndex() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.add("Menger");
+        array.add("Veatch");
+        array.add("Menger");
+
+        assertEquals(1, array.indexOf("Menger"));
+        assertEquals(-1, array.indexOf("Rand"));
+    }
 }
