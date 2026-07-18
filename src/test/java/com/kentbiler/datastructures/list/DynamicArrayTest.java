@@ -142,4 +142,12 @@ class DynamicArrayTest {
         assertEquals(1, array.size());
         assertEquals("Aristotle", array.get(0));
     }
+
+    @Test
+    void constructorRejectsNegativeCapacity() {
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new DynamicArray<String>(-1)
+        );
+    }
 }

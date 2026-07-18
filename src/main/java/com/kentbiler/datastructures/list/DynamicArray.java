@@ -12,6 +12,12 @@ public class DynamicArray<T> {
     }
 
     public DynamicArray(int initialCapacity) {
+        if (initialCapacity < 0) {
+            throw new IllegalArgumentException(
+                "Initial capacity cannot be negative"
+            );
+        }
+
         elements = new Object[initialCapacity];
     }
 
