@@ -167,4 +167,31 @@ class DynamicArrayTest {
         assertEquals("Veatch", array.get(1));
         assertEquals(2, array.indexOf("Menger"));
     }
+
+    @Test
+    void removeByValueReturnsFalsWhenValueIsAbsent() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.add("Menger");
+
+        boolean removed = array.remove("Veatch");
+
+        assertEquals(false, removed);
+        assertEquals(2, array.size());
+    }
+
+    @Test
+    void indexOfAndRemoveSupportNullValues() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.add(null);
+        array.add("Menger");
+
+        assertEquals(1, array.indexOf(null));
+        assertEquals(true, array.remove(null));
+        assertEquals(2, array.size());
+        assertEquals("Menger", array.get(1));
+    }
 }
