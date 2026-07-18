@@ -180,4 +180,16 @@ public class DynamicArray<T> {
 
         return result;
     }
+
+    public void ensureCapacity(int minimumCapacity) {
+        if (minimumCapacity > elements.length) {
+            Object[] largerArray = new Object[minimumCapacity];
+
+            for (int i = 0; i < size; i++) {
+                largerArray[i] = elements[i];
+            }
+
+            elements = largerArray;
+        }
+    }
 }

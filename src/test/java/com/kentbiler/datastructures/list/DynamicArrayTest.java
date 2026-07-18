@@ -234,4 +234,16 @@ class DynamicArrayTest {
             array.toArray()
         );
     }
+
+    @Test
+    void ensureCapacityIncreasesCapacityWithoutChangingSize() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.ensureCapacity(25);
+
+        assertEquals(1, array.size());
+        assertEquals(25, array.capacity());
+        assertEquals("Aristotle", array.get(0));
+    }
 }
