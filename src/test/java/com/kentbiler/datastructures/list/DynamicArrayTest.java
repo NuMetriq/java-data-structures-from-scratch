@@ -194,4 +194,17 @@ class DynamicArrayTest {
         assertEquals(2, array.size());
         assertEquals("Menger", array.get(1));
     }
+
+    @Test
+    void lastIndexOfReturnsFinalMatchingIndex() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.add("Menger");
+        array.add("Veatch");
+        array.add("Menger");
+
+        assertEquals(3, array.lastIndexOf("Menger"));
+        assertEquals(-1, array.lastIndexOf("Rand"));
+    }
 }

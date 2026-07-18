@@ -122,6 +122,16 @@ public class DynamicArray<T> {
         return -1;
     }
 
+    public int lastIndexOf(T value) {
+        for (int i = size - 1; i >= 0; i--) {
+            if (Objects.equals(elements[i], value)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     public boolean contains(T value) {
         return indexOf(value) != -1;
     }
