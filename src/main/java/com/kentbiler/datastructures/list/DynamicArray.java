@@ -133,4 +133,15 @@ public class DynamicArray<T> {
 
         size = 0;
     }
+
+    public boolean remove(T value) {
+        int index = indexOf(value);
+
+        if(index == -1) {
+            return false;
+        }
+
+        remove(index);
+        return true;
+    }
 }

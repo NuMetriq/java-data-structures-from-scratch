@@ -150,4 +150,21 @@ class DynamicArrayTest {
             () -> new DynamicArray<String>(-1)
         );
     }
+
+    @Test
+    void removeByValueRemovesFirstMatchingElement() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.add("Menger");
+        array.add("Veatch");
+        array.add("Menger");
+
+        boolean removed = array.remove("Menger");
+
+        assertEquals(true, removed);
+        assertEquals(3, array.size());
+        assertEquals("Veatch", array.get(1));
+        assertEquals(2, array.indexOf("Menger"));
+    }
 }
