@@ -207,4 +207,15 @@ class DynamicArrayTest {
         assertEquals(3, array.lastIndexOf("Menger"));
         assertEquals(-1, array.lastIndexOf("Rand"));
     }
+
+    @Test
+    void toStringDisplaysLogicalElements() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.add("Menger");
+        array.add("Veatch");
+
+        assertEquals("[Aristotle, Menger, Veatch]", array.toString());
+    }
 }

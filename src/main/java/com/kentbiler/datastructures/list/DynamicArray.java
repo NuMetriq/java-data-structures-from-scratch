@@ -154,4 +154,20 @@ public class DynamicArray<T> {
         remove(index);
         return true;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+
+        for (int i = 0; i < size; i++) {
+            result.append(elements[i]);
+
+            if (i < size - 1) {
+                result.append(", ");
+            }
+        }
+
+        result.append("]");
+        return result.toString();
+    }
 }
