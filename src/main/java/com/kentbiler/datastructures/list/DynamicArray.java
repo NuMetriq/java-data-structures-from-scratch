@@ -192,4 +192,14 @@ public class DynamicArray<T> {
             elements = largerArray;
         }
     }
+
+    public void trimToSize() {
+        Object[] trimmedArray = new Object[size];
+
+        for (int i = 0; i < size; i++) {
+            trimmedArray[i] = elements[i];
+        }
+
+        elements = trimmedArray;
+    }
 }

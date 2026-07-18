@@ -246,4 +246,19 @@ class DynamicArrayTest {
         assertEquals(25, array.capacity());
         assertEquals("Aristotle", array.get(0));
     }
+
+    @Test
+    void trimToSizeReducesCapacityToCurrentSize() {
+       DynamicArray<String> array = new DynamicArray<>(25);
+
+       array.add("Aristotle");
+       array.add("Menger");
+
+       array.trimToSize();
+
+       assertEquals(2, array.size());
+       assertEquals(2, array.capacity());
+       assertEquals("Aristotle", array.get(0));
+       assertEquals("Menger", array.get(1));
+    }
 }
