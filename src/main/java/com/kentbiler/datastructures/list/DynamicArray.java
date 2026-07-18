@@ -11,6 +11,10 @@ public class DynamicArray<T> {
         elements = new Object[10];
     }
 
+    public DynamicArray(int initialCapacity) {
+        elements = new Object[initialCapacity];
+    }
+
     public int size() {
         return size;
     }

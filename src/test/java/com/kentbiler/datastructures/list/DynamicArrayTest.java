@@ -124,4 +124,12 @@ class DynamicArrayTest {
         assertEquals(0, array.size());
         assertEquals(true, array.isEmpty());
     }
+
+    @Test
+    void constructorUsesSpecifiedInitialCapacity() {
+        DynamicArray<String> array = new DynamicArray<>(25);
+
+        assertEquals(0, array.size());
+        assertEquals(25, array.capacity());
+    }
 }
