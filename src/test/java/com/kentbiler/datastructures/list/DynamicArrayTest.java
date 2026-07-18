@@ -111,4 +111,17 @@ class DynamicArrayTest {
         assertEquals(true, array.contains("Menger"));
         assertEquals(false, array.contains("Veatch"));
     }
+
+    @Test
+    void clearRemovesAllElements() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.add("Menger");
+
+        array.clear();
+
+        assertEquals(0, array.size());
+        assertEquals(true, array.isEmpty());
+    }
 }
