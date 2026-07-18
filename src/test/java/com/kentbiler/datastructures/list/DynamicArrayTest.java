@@ -132,4 +132,14 @@ class DynamicArrayTest {
         assertEquals(0, array.size());
         assertEquals(25, array.capacity());
     }
+
+    @Test
+    void zeroCapacityArrayCanStillGrow() {
+        DynamicArray<String> array = new DynamicArray<>(0);
+
+        array.add("Aristotle");
+
+        assertEquals(1, array.size());
+        assertEquals("Aristotle", array.get(0));
+    }
 }

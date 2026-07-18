@@ -96,7 +96,8 @@ public class DynamicArray<T> {
     }
 
     private void grow() {
-        Object[] largerArray = new Object[elements.length * 2];
+        int newCapacity = elements.length == 0 ? 1 : elements.length * 2;
+        Object[] largerArray = new Object[newCapacity];
 
         for (int i = 0; i < elements.length; i++) {
             largerArray[i] = elements[i];
