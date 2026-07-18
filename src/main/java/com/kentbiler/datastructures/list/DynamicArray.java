@@ -1,8 +1,8 @@
 package com.kentbiler.datastructures.list;
 
 import java.util.Objects;
-
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class DynamicArray<T> implements Iterable<T> {
 
@@ -218,6 +218,10 @@ public class DynamicArray<T> implements Iterable<T> {
 
             @Override
             public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException("No more elements");
+                }
+
                 return get(currentIndex++);
             }
         };

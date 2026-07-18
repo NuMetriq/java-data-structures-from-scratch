@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 class DynamicArrayTest {
 
     @Test
@@ -277,5 +280,17 @@ class DynamicArrayTest {
         }
 
         assertEquals("Aristotle,Menger,Veatch,", result.toString());
+    }
+
+    @Test
+    void iteratorThrowsWhenNoElementsRemain() {
+        DynamicArray<String> array = new DynamicArray<>();
+        array.add("Aristotle");
+
+        Iterator<String> iterator = array.iterator();
+
+        assertEquals("Aristotle", iterator.next());
+
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 }
