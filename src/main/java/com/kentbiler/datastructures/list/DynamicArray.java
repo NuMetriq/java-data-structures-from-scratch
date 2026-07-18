@@ -170,4 +170,14 @@ public class DynamicArray<T> {
         result.append("]");
         return result.toString();
     }
+
+    public Object[] toArray() {
+        Object[] result = new Object[size];
+
+        for (int i = 0; i < size; i++) {
+            result[i] = elements[i];
+        }
+
+        return result;
+    }
 }

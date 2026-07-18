@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
 class DynamicArrayTest {
 
     @Test
@@ -217,5 +219,19 @@ class DynamicArrayTest {
         array.add("Veatch");
 
         assertEquals("[Aristotle, Menger, Veatch]", array.toString());
+    }
+
+    @Test
+    void toArrayReturnsOnlyLogicalElements() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.add("Menger");
+        array.add("Veatch");
+
+        assertArrayEquals(
+            new Object[]{"Aristotle", "Menger", "Veatch"},
+            array.toArray()
+        );
     }
 }
