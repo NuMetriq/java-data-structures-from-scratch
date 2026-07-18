@@ -100,4 +100,15 @@ class DynamicArrayTest {
         assertEquals(1, array.indexOf("Menger"));
         assertEquals(-1, array.indexOf("Rand"));
     }
+
+    @Test
+    void containsReturnsWhetherValueExists() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.add("Menger");
+
+        assertEquals(true, array.contains("Menger"));
+        assertEquals(false, array.contains("Veatch"));
+    }
 }

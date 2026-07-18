@@ -110,4 +110,8 @@ public class DynamicArray<T> {
 
         return -1;
     }
+
+    public boolean contains(T value) {
+        return indexOf(value) != -1;
+    }
 }
