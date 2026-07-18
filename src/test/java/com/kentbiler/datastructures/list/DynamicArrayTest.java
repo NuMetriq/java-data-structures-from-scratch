@@ -261,4 +261,21 @@ class DynamicArrayTest {
        assertEquals("Aristotle", array.get(0));
        assertEquals("Menger", array.get(1));
     }
+
+    @Test
+    void iteratorVisitsElementsInOrder() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.add("Menger");
+        array.add("Veatch");
+
+        StringBuilder result = new StringBuilder();
+
+        for (String value : array) {
+            result.append(value).append(",");
+        }
+
+        assertEquals("Aristotle,Menger,Veatch,", result.toString());
+    }
 }

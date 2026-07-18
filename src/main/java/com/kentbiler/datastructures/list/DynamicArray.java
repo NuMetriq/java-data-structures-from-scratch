@@ -2,7 +2,9 @@ package com.kentbiler.datastructures.list;
 
 import java.util.Objects;
 
-public class DynamicArray<T> {
+import java.util.Iterator;
+
+public class DynamicArray<T> implements Iterable<T> {
 
     private Object[] elements;
     private int size;
@@ -201,5 +203,23 @@ public class DynamicArray<T> {
         }
 
         elements = trimmedArray;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+
+            private int currentIndex;
+
+            @Override
+            public boolean hasNext() {
+                return currentIndex < size;
+            }
+
+            @Override
+            public T next() {
+                return get(currentIndex++);
+            }
+        };
     }
 }
