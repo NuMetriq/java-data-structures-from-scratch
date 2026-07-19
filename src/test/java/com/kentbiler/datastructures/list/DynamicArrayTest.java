@@ -434,4 +434,18 @@ class DynamicArrayTest {
             () -> array.remove(1)
         );
     }
+
+    @Test
+    void toArrayReturnsIndependentCopy() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.add("Menger");
+
+        Object[] copy = array.toArray();
+        copy[0] = "Veatch";
+
+        assertEquals("Aristotle", array.get(0));
+        assertEquals("Veatch", copy[0]);
+    }
 }
