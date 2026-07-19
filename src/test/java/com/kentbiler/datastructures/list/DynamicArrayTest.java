@@ -357,4 +357,13 @@ class DynamicArrayTest {
 
         assertEquals("Veatch", iterator.next());
     }
+
+    @Test
+    void ensureCapacityDoesNotReduceExistingCapacity() {
+        DynamicArray<String> array = new DynamicArray<>(25);
+
+        array.ensureCapacity(10);
+
+        assertEquals(25, array.capacity());
+    }
 }
