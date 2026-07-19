@@ -149,6 +149,7 @@ public class DynamicArray<T> implements Iterable<T> {
         }
 
         size = 0;
+        modCount++;
     }
 
     public boolean remove(T value) {
