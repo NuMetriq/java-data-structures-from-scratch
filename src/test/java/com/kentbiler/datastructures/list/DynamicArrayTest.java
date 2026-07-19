@@ -309,4 +309,21 @@ class DynamicArrayTest {
             iterator::next
         );
     }
+
+    @Test
+    void iteratorDetectsRemovalAfterCreation() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.add("Menger");
+
+        Iterator<String> iterator = array.iterator();
+
+        array.remove(0);
+
+        assertThrows(
+            ConcurrentModificationException.class,
+            iterator::next
+        );
+    }
 }

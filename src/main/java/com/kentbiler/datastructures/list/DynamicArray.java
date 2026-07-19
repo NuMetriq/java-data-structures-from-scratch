@@ -95,6 +95,7 @@ public class DynamicArray<T> implements Iterable<T> {
 
         size--;
         elements[size] = null;
+        modCount++;
 
         return removedValue;
     }
