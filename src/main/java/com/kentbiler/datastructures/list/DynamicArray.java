@@ -109,14 +109,11 @@ public class DynamicArray<T> implements Iterable<T> {
     }
 
     private void grow() {
-        int newCapacity = elements.length == 0 ? 1 : elements.length * 2;
-        Object[] largerArray = new Object[newCapacity];
+        int newCapacity = elements.length == 0
+            ? 1
+            : elements.length * 2;
 
-        for (int i = 0; i < elements.length; i++) {
-            largerArray[i] = elements[i];
-        }
-
-        elements = largerArray;
+        resize(newCapacity);
     }
 
     public int indexOf(T value) {
@@ -197,24 +194,12 @@ public class DynamicArray<T> implements Iterable<T> {
         }
 
         if (minimumCapacity > elements.length) {
-            Object[] largerArray = new Object[minimumCapacity];
-
-            for (int i = 0; i < size; i++) {
-                largerArray[i] = elements[i];
-            }
-
-            elements = largerArray;
+            resize(minimumCapacity);
         }
     }
 
     public void trimToSize() {
-        Object[] trimmedArray = new Object[size];
-
-        for (int i = 0; i < size; i++) {
-            trimmedArray[i] = elements[i];
-        }
-
-        elements = trimmedArray;
+        resize(size);
     }
 
     @Override
@@ -246,5 +231,15 @@ public class DynamicArray<T> implements Iterable<T> {
                 return get(currentIndex++);
             }
         };
+    }
+
+    private void resize(int newCapacity) {
+        Object[] resizedArray = new Object[newCapacity];
+
+        for (int i = 0; i < size; i++) {
+            resizedArray[i] = elements[i];
+        }
+
+        elements = resizedArray;
     }
 }
