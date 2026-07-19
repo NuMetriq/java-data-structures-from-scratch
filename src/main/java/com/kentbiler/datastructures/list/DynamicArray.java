@@ -190,6 +190,12 @@ public class DynamicArray<T> implements Iterable<T> {
     }
 
     public void ensureCapacity(int minimumCapacity) {
+        if (minimumCapacity < 0) {
+            throw new IllegalArgumentException(
+                "Minimum capacity cannot be negative"
+            );
+        }
+
         if (minimumCapacity > elements.length) {
             Object[] largerArray = new Object[minimumCapacity];
 

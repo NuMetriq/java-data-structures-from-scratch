@@ -378,4 +378,14 @@ class DynamicArrayTest {
             () -> array.add(2, "Menger")
         );
     }
+
+    @Test
+    void ensureCapacityRejectsNegativeCapacity() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> array.ensureCapacity(-1)
+        );
+    }
 }
