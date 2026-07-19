@@ -417,4 +417,21 @@ class DynamicArrayTest {
         assertEquals(0, array.size());
         assertEquals(25, array.capacity());
     }
+
+    @Test
+    void removeRejectsInvalidIndexes() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+
+        assertThrows(
+            IndexOutOfBoundsException.class,
+            () -> array.remove(-1)
+        );
+
+        assertThrows(
+            IndexOutOfBoundsException.class,
+            () -> array.remove(1)
+        );
+    }
 }
