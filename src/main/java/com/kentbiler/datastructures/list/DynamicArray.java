@@ -7,12 +7,14 @@ import java.util.ConcurrentModificationException;
 
 public class DynamicArray<T> implements Iterable<T> {
 
+    private static final int DEFAULT_CAPACITY = 10;
+
     private Object[] elements;
     private int size;
     private int modCount;
 
     public DynamicArray() {
-        elements = new Object[10];
+        elements = new Object[DEFAULT_CAPACITY];
     }
 
     public DynamicArray(int initialCapacity) {
