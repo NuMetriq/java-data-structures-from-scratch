@@ -388,4 +388,20 @@ class DynamicArrayTest {
             () -> array.ensureCapacity(-1)
         );
     }
+
+    @Test
+    void iteratorHasNextDetectsStructuralModification() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+
+        Iterator<String> iterator = array.iterator();
+
+        array.add("Menger");
+
+        assertThrows(
+            ConcurrentModificationException.class,
+            iterator::hasNext
+        );
+    }
 }

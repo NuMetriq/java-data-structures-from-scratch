@@ -226,6 +226,10 @@ public class DynamicArray<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+
                 return currentIndex < size;
             }
 
