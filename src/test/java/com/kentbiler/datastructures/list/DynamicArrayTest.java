@@ -404,4 +404,17 @@ class DynamicArrayTest {
             iterator::hasNext
         );
     }
+
+    @Test
+    void clearRetainsExistingCapacity() {
+        DynamicArray<String> array = new DynamicArray<>(25);
+
+        array.add("Aristotle");
+        array.add("Menger");
+
+        array.clear();
+
+        assertEquals(0, array.size());
+        assertEquals(25, array.capacity());
+    }
 }
