@@ -343,4 +343,18 @@ class DynamicArrayTest {
             iterator::next
         );
     }
+
+    @Test
+    void setDoesNotInvalidateIterator() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.add("Menger");
+
+        Iterator<String> iterator = array.iterator();
+
+        array.set(0, "Veatch");
+
+        assertEquals("Veatch", iterator.next());
+    }
 }
