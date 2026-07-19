@@ -3,13 +3,12 @@ package com.kentbiler.datastructures.list;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.ConcurrentModificationException;
 
 class DynamicArrayTest {
 
@@ -292,5 +291,22 @@ class DynamicArrayTest {
         assertEquals("Aristotle", iterator.next());
 
         assertThrows(NoSuchElementException.class, iterator::next);
+    }
+
+    @Test
+    void iteratorDetectsStructuralModification() {
+        DynamicArray<String> array = new DynamicArray<>();
+
+        array.add("Aristotle");
+        array.add("Menger");
+
+        Iterator<String> iterator = array.iterator();
+
+        array.add("Veatch");
+
+        assertThrows(
+            ConcurrentModificationException.class,
+            iterator::next
+        );
     }
 }

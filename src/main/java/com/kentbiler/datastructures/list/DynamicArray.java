@@ -3,11 +3,13 @@ package com.kentbiler.datastructures.list;
 import java.util.Objects;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.ConcurrentModificationException;
 
 public class DynamicArray<T> implements Iterable<T> {
 
     private Object[] elements;
     private int size;
+    private int modCount;
 
     public DynamicArray() {
         elements = new Object[10];
@@ -42,6 +44,7 @@ public class DynamicArray<T> implements Iterable<T> {
 
         elements[size] = value;
         size++;
+        modCount++;
     }
 
     public void add(int index, T value) {
@@ -61,6 +64,7 @@ public class DynamicArray<T> implements Iterable<T> {
 
         elements[index] = value;
         size++;
+        modCount++;
     }
 
     @SuppressWarnings("unchecked")
@@ -210,6 +214,7 @@ public class DynamicArray<T> implements Iterable<T> {
         return new Iterator<T>() {
 
             private int currentIndex;
+            private final int expectedModCount = modCount;
 
             @Override
             public boolean hasNext() {
@@ -218,6 +223,10 @@ public class DynamicArray<T> implements Iterable<T> {
 
             @Override
             public T next() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+
                 if (!hasNext()) {
                     throw new NoSuchElementException("No more elements");
                 }
