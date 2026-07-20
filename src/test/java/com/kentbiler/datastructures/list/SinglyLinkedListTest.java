@@ -51,4 +51,19 @@ class SinglyLinkedListTest {
         assertEquals("Aristotle", list.getFirst());
         assertEquals("Menger", list.getLast());
     }
+
+    @Test
+    void removeLastReturnsAndRemovesFinalElement() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+        list.addLast("Veatch");
+
+        String removed = list.removeLast();
+
+        assertEquals("Veatch", removed);
+        assertEquals("Menger", list.getLast());
+        assertEquals(2, list.size());
+    }
 }

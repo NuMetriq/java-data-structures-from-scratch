@@ -84,4 +84,29 @@ public class SinglyLinkedList<T> {
 
         return current.value;
     }
+
+    public T removeLast() {
+        if (head == null) {
+            throw new NoSuchElementException("List is empty");
+        }
+
+        if (head.next == null) {
+            T removedValue = head.value;
+            head = null;
+            size--;
+            return removedValue;
+        }
+
+        Node<T> current = head;
+
+        while (current.next.next != null) {
+            current = current.next;
+        }
+
+        T removedValue = current.next.value;
+        current.next = null;
+        size--;
+
+        return removedValue;
+    }
 }
