@@ -66,4 +66,17 @@ class SinglyLinkedListTest {
         assertEquals("Menger", list.getLast());
         assertEquals(2, list.size());
     }
+
+    @Test
+    void getReturnsElementAtIndex() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+        list.addLast("Veatch");
+
+        assertEquals("Aristotle", list.get(0));
+        assertEquals("Menger", list.get(1));
+        assertEquals("Veatch", list.get(2));
+    }
 }

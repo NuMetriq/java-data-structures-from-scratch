@@ -109,4 +109,24 @@ public class SinglyLinkedList<T> {
 
         return removedValue;
     }
+
+    private void checkIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException(
+                "Index: " + index + ", Size: " + size
+            );
+        }
+    }
+
+    public T get(int index) {
+        checkIndex(index);
+
+        Node<T> current = head;
+
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+
+        return current.value;
+    }
 }
