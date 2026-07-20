@@ -51,4 +51,37 @@ public class SinglyLinkedList<T> {
 
         return removedValue;
     }
+
+    public void addLast(T value) {
+        Node<T> newNode = new Node<>(value);
+
+        if (head == null) {
+            head = newNode;
+            size++;
+            return;
+        }
+
+        Node<T> current = head;
+
+        while (current.next != null) {
+            current = current.next;
+        }
+
+        current.next = newNode;
+        size++;
+    }
+
+    public T getLast() {
+        if (head == null) {
+            throw new NoSuchElementException("List is empty");
+        }
+
+        Node<T> current = head;
+
+        while (current.next != null) {
+            current = current.next;
+        }
+
+        return current.value;
+    }
 }

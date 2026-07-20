@@ -39,4 +39,16 @@ class SinglyLinkedListTest {
         assertEquals("Menger", list.getFirst());
         assertEquals(1, list.size());
     }
+
+    @Test
+    void addLastStoresElementAtEnd() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+
+        assertEquals(2, list.size());
+        assertEquals("Aristotle", list.getFirst());
+        assertEquals("Menger", list.getLast());
+    }
 }
