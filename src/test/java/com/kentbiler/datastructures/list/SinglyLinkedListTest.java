@@ -25,4 +25,18 @@ class SinglyLinkedListTest {
         assertEquals(2, list.size());
         assertEquals("Aristotle", list.getFirst());
     }
+
+    @Test
+    void removeFirstReturnsAndRemovesBeginningElement() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.addFirst("Menger");
+        list.addFirst("Aristotle");
+
+        String removed = list.removeFirst();
+
+        assertEquals("Aristotle", removed);
+        assertEquals("Menger", list.getFirst());
+        assertEquals(1, list.size());
+    }
 }
