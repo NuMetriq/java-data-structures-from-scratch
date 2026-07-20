@@ -1,5 +1,7 @@
 package com.kentbiler.datastructures.list;
 
+import java.util.NoSuchElementException;
+
 public class SinglyLinkedList<T> {
 
     private static class Node<T> {
@@ -20,5 +22,21 @@ public class SinglyLinkedList<T> {
 
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    public void addFirst(T value) {
+        Node<T> newNode = new Node<>(value);
+
+        newNode.next = head;
+        head = newNode;
+        size++;
+    }
+
+    public T getFirst() {
+        if (head == null) {
+            throw new NoSuchElementException("List is empty");
+        }
+
+        return head.value;
     }
 }
