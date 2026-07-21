@@ -111,4 +111,19 @@ class SinglyLinkedListTest {
         assertEquals("Veatch", list.get(1));
         assertEquals(2, list.size());
     }
+
+    @Test
+    void addAtIndexInsertsAndShiftsLaterElements() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Veatch");
+
+        list.add(1, "Menger");
+
+        assertEquals("Aristotle", list.get(0));
+        assertEquals("Menger", list.get(1));
+        assertEquals("Veatch", list.get(2));
+        assertEquals(3, list.size());
+    }
 }

@@ -144,4 +144,28 @@ public class SinglyLinkedList<T> {
 
         return previousValue;
     }
+
+    public void add(int index, T value) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException(
+                "Index: " + index + ", Size: " + size
+            );
+        }
+
+        if (index == 0) {
+            addFirst(value);
+            return;
+        }
+
+        Node<T> previous = head;
+
+        for (int i = 0; i < index - 1; i++) {
+            previous = previous.next;
+        }
+
+        Node<T> newNode = new Node<>(value);
+        newNode.next = previous.next;
+        previous.next = newNode;
+        size++;
+    }
 }
