@@ -129,4 +129,19 @@ public class SinglyLinkedList<T> {
 
         return current.value;
     }
+
+    public T set(int index, T value) {
+        checkIndex(index);
+
+        Node<T> current = head;
+
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+
+        T previousValue = current.value;
+        current.value = value;
+
+        return previousValue;
+    }
 }
