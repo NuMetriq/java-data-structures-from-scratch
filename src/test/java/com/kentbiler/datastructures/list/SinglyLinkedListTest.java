@@ -3,6 +3,7 @@ package com.kentbiler.datastructures.list;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SinglyLinkedListTest {
@@ -78,5 +79,22 @@ class SinglyLinkedListTest {
         assertEquals("Aristotle", list.get(0));
         assertEquals("Menger", list.get(1));
         assertEquals("Veatch", list.get(2));
+    }
+
+    @Test
+    void getRejectsInvalidIndexes() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.addLast("Aristotle");
+
+        assertThrows(
+            IndexOutOfBoundsException.class,
+            () -> list.get(-1)
+        );
+
+        assertThrows(
+            IndexOutOfBoundsException.class,
+            () -> list.get(1)
+        );
     }
 }
