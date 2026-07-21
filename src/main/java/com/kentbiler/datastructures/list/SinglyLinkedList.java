@@ -168,4 +168,24 @@ public class SinglyLinkedList<T> {
         previous.next = newNode;
         size++;
     }
+
+    public T remove(int index) {
+        checkIndex(index);
+
+        if (index == 0) {
+            return removeFirst();
+        }
+
+        Node<T> previous = head;
+
+        for (int i = 0; i < index - 1; i++) {
+            previous = previous.next;
+        }
+
+        T removedValue = previous.next.value;
+        previous.next = previous.next.next;
+        size--;
+
+        return removedValue;
+    }
 }
