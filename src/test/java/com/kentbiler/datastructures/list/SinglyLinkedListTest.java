@@ -142,4 +142,17 @@ class SinglyLinkedListTest {
         assertEquals("Veatch", list.get(1));
         assertEquals(2, list.size());
     }
+
+    @Test
+    void indexOfReturnsFirstMatchingIndex() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+        list.addLast("Veatch");
+        list.addLast("Menger");
+
+        assertEquals(1, list.indexOf("Menger"));
+        assertEquals(-1, list.indexOf("Rand"));
+    }
 }

@@ -1,5 +1,6 @@
 package com.kentbiler.datastructures.list;
 
+import java.util.Objects;
 import java.util.NoSuchElementException;
 
 public class SinglyLinkedList<T> {
@@ -187,5 +188,21 @@ public class SinglyLinkedList<T> {
         size--;
 
         return removedValue;
+    }
+
+    public int indexOf(T value) {
+        Node<T> current = head;
+        int index = 0;
+
+        while (current != null) {
+            if (Objects.equals(current.value, value)) {
+                return index;
+            }
+
+            current = current.next;
+            index++;
+        }
+
+        return -1;
     }
 }
