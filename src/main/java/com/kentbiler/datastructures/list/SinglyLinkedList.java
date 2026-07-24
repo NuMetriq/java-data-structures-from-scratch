@@ -225,4 +225,21 @@ public class SinglyLinkedList<T> {
         head = null;
         size = 0;
     }
+
+    public int lastIndexOf(T value) {
+        Node<T> current = head;
+        int currentIndex = 0;
+        int lastMatchingIndex = -1;
+
+        while (current != null) {
+            if (Objects.equals(current.value, value)) {
+                lastMatchingIndex = currentIndex;
+            }
+
+            current = current.next;
+            currentIndex++;
+        }
+
+        return lastMatchingIndex;
+    }
 }

@@ -197,4 +197,17 @@ class SinglyLinkedListTest {
         assertEquals(0, list.size());
         assertTrue(list.isEmpty());
     }
+
+    @Test
+    void lastIndexOfReturnsFinalMatchingIndex() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+        list.addLast("Veatch");
+        list.addLast("Menger");
+
+        assertEquals(3, list.lastIndexOf("Menger"));
+        assertEquals(-1, list.lastIndexOf("Rand"));
+    }
 }
