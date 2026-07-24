@@ -209,4 +209,15 @@ public class SinglyLinkedList<T> {
     public boolean contains(T value) {
         return indexOf(value) != -1;
     }
+
+    public boolean remove(T value) {
+        int index = indexOf(value);
+
+        if (index == -1) {
+            return false;
+        }
+
+        remove(index);
+        return true;
+    }
 }

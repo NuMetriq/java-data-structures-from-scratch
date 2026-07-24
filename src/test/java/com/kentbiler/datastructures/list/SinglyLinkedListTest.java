@@ -167,4 +167,21 @@ class SinglyLinkedListTest {
         assertTrue(list.contains("Menger"));
         assertFalse(list.contains("Veatch"));
     }
+
+    @Test
+    void removeByValueRemovesFirstMatchingElement() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+        list.addLast("Veatch");
+        list.addLast("Menger");
+
+        boolean removed = list.remove("Menger");
+
+        assertTrue(removed);
+        assertEquals(3, list.size());
+        assertEquals("Veatch", list.get(1));
+        assertEquals(2, list.indexOf("Menger"));
+    }
 }
