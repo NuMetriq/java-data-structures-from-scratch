@@ -220,4 +220,9 @@ public class SinglyLinkedList<T> {
         remove(index);
         return true;
     }
+
+    public void clear() {
+        head = null;
+        size = 0;
+    }
 }

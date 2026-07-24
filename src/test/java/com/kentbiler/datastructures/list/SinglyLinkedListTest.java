@@ -184,4 +184,17 @@ class SinglyLinkedListTest {
         assertEquals("Veatch", list.get(1));
         assertEquals(2, list.indexOf("Menger"));
     }
+
+    @Test
+    void clearRemovesAllElements() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+
+        list.clear();
+
+        assertEquals(0, list.size());
+        assertTrue(list.isEmpty());
+    }
 }
