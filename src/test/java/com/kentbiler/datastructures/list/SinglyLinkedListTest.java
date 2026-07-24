@@ -3,6 +3,7 @@ package com.kentbiler.datastructures.list;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -154,5 +155,16 @@ class SinglyLinkedListTest {
 
         assertEquals(1, list.indexOf("Menger"));
         assertEquals(-1, list.indexOf("Rand"));
+    }
+
+    @Test
+    void containsReturnsWhetherValueExists() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+
+        assertTrue(list.contains("Menger"));
+        assertFalse(list.contains("Veatch"));
     }
 }
