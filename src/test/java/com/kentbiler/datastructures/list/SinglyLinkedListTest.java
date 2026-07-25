@@ -210,4 +210,15 @@ class SinglyLinkedListTest {
         assertEquals(3, list.lastIndexOf("Menger"));
         assertEquals(-1, list.lastIndexOf("Rand"));
     }
+
+    @Test
+    void toStringDisplaysElementsInOrder() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+        list.addLast("Veatch");
+
+        assertEquals("[Aristotle, Menger, Veatch]", list.toString());
+    }
 }

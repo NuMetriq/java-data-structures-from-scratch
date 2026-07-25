@@ -242,4 +242,23 @@ public class SinglyLinkedList<T> {
 
         return lastMatchingIndex;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+        Node<T> current = head;
+
+        while (current != null) {
+            result.append(current.value);
+
+            if (current.next != null) {
+                result.append(", ");
+            }
+
+            current = current.next;
+        }
+
+        result.append("]");
+        return result.toString();
+    }
 }
