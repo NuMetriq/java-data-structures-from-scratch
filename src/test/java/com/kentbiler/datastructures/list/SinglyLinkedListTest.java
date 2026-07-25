@@ -221,4 +221,21 @@ class SinglyLinkedListTest {
 
         assertEquals("[Aristotle, Menger, Veatch]", list.toString());
     }
+
+    @Test
+    void iteratorVisitsElementsInOrder() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+        list.addLast("Veatch");
+
+        StringBuilder result = new StringBuilder();
+
+        for (String value : list) {
+            result.append(value).append(",");
+        }
+
+        assertEquals("Aristotle,Menger,Veatch,", result.toString());
+    }
 }

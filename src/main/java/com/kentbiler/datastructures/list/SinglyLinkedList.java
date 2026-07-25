@@ -1,9 +1,10 @@
 package com.kentbiler.datastructures.list;
 
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.NoSuchElementException;
 
-public class SinglyLinkedList<T> {
+public class SinglyLinkedList<T> implements Iterable<T> {
 
     private static class Node<T> {
         private T value;
@@ -260,5 +261,29 @@ public class SinglyLinkedList<T> {
 
         result.append("]");
         return result.toString();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+
+            private Node<T> current = head;
+
+            @Override
+            public boolean hasNext() {
+                return current != null;
+            }
+
+            @Override
+            public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException("No more elements");
+                }
+
+                T value = current.value;
+                current = current.next;
+                return value;
+            }
+        };
     }
 }
