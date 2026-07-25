@@ -1,5 +1,8 @@
 package com.kentbiler.datastructures.list;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -237,5 +240,17 @@ class SinglyLinkedListTest {
         }
 
         assertEquals("Aristotle,Menger,Veatch,", result.toString());
+    }
+
+    @Test
+    void iteratorThrowsWhenNoElementsRemain() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+        list.addLast("Aristotle");
+
+        Iterator<String> iterator = list.iterator();
+
+        assertEquals("Aristotle", iterator.next());
+
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 }
