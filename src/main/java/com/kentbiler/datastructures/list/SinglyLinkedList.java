@@ -1,5 +1,6 @@
 package com.kentbiler.datastructures.list;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.NoSuchElementException;
@@ -17,6 +18,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 
     private Node<T> head;
     private int size;
+    private int modCount;
 
     public int size() {
         return size;
@@ -60,6 +62,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         if (head == null) {
             head = newNode;
             size++;
+            modCount++;
             return;
         }
 
@@ -71,6 +74,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 
         current.next = newNode;
         size++;
+        modCount++;
     }
 
     public T getLast() {
@@ -268,6 +272,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         return new Iterator<T>() {
 
             private Node<T> current = head;
+            private final int expectedModCount = modCount;
 
             @Override
             public boolean hasNext() {
@@ -276,6 +281,10 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 
             @Override
             public T next() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+
                 if (!hasNext()) {
                     throw new NoSuchElementException("No more elements");
                 }

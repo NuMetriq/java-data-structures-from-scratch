@@ -1,5 +1,6 @@
 package com.kentbiler.datastructures.list;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -252,5 +253,22 @@ class SinglyLinkedListTest {
         assertEquals("Aristotle", iterator.next());
 
         assertThrows(NoSuchElementException.class, iterator::next);
+    }
+
+    @Test
+    void iteratorDetectsStructuralModification() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+
+        Iterator<String> iterator = list.iterator();
+
+        list.addLast("Veatch");
+
+        assertThrows(
+            ConcurrentModificationException.class,
+            iterator::next
+        );
     }
 }
