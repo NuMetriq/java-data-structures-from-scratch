@@ -2,12 +2,12 @@ package com.kentbiler.datastructures.list;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SinglyLinkedList<T> implements Iterable<T> {
 
-    private static class Node<T> {
+    private static final class Node<T> {
         private T value;
         private Node<T> next;
 
@@ -33,6 +33,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 
         newNode.next = head;
         head = newNode;
+
         size++;
         modCount++;
     }
@@ -52,6 +53,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 
         T removedValue = head.value;
         head = head.next;
+
         size--;
         modCount++;
 
@@ -63,18 +65,16 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 
         if (head == null) {
             head = newNode;
-            size++;
-            modCount++;
-            return;
+        } else {
+            Node<T> current = head;
+
+            while (current.next != null) {
+                current = current.next;
+            }
+
+            current.next = newNode;
         }
 
-        Node<T> current = head;
-
-        while (current.next != null) {
-            current = current.next;
-        }
-
-        current.next = newNode;
         size++;
         modCount++;
     }
@@ -101,100 +101,88 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         if (head.next == null) {
             T removedValue = head.value;
             head = null;
+
             size--;
+            modCount++;
+
             return removedValue;
         }
 
-        Node<T> current = head;
+        Node<T> previous = head;
+        Node<T> current = head.next;
 
-        while (current.next.next != null) {
+        while (current.next != null) {
+            previous = current;
             current = current.next;
         }
 
-        T removedValue = current.next.value;
-        current.next = null;
+        previous.next = null;
+
         size--;
-
-        return removedValue;
-    }
-
-    private void checkIndex(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException(
-                "Index: " + index + ", Size: " + size
-            );
-        }
-    }
-
-    public T get(int index) {
-        checkIndex(index);
-
-        Node<T> current = head;
-
-        for (int i = 0; i < index; i++) {
-            current = current.next;
-        }
+        modCount++;
 
         return current.value;
     }
 
-    public T set(int index, T value) {
-        checkIndex(index);
-
-        Node<T> current = head;
-
-        for (int i = 0; i < index; i++) {
-            current = current.next;
-        }
-
-        T previousValue = current.value;
-        current.value = value;
-
-        return previousValue;
-    }
-
     public void add(int index, T value) {
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException(
-                "Index: " + index + ", Size: " + size
-            );
-        }
+        checkPositionIndex(index);
 
         if (index == 0) {
             addFirst(value);
             return;
         }
 
-        Node<T> previous = head;
-
-        for (int i = 0; i < index - 1; i++) {
-            previous = previous.next;
+        if (index == size) {
+            addLast(value);
+            return;
         }
 
+        Node<T> previous = nodeAt(index - 1);
         Node<T> newNode = new Node<>(value);
+
         newNode.next = previous.next;
         previous.next = newNode;
+
         size++;
+        modCount++;
+    }
+
+    public T get(int index) {
+        checkElementIndex(index);
+        return nodeAt(index).value;
+    }
+
+    public T set(int index, T value) {
+        checkElementIndex(index);
+
+        Node<T> node = nodeAt(index);
+        T previousValue = node.value;
+
+        node.value = value;
+
+        return previousValue;
     }
 
     public T remove(int index) {
-        checkIndex(index);
+        checkElementIndex(index);
 
         if (index == 0) {
             return removeFirst();
         }
 
-        Node<T> previous = head;
-
-        for (int i = 0; i < index - 1; i++) {
-            previous = previous.next;
+        if (index == size - 1) {
+            return removeLast();
         }
 
-        T removedValue = previous.next.value;
-        previous.next = previous.next.next;
-        size--;
+        Node<T> previous = nodeAt(index - 1);
+        Node<T> removedNode = previous.next;
 
-        return removedValue;
+        previous.next = removedNode.next;
+
+        size--;
+        modCount++;
+
+        return removedNode.value;
     }
 
     public int indexOf(T value) {
@@ -213,26 +201,6 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         return -1;
     }
 
-    public boolean contains(T value) {
-        return indexOf(value) != -1;
-    }
-
-    public boolean remove(T value) {
-        int index = indexOf(value);
-
-        if (index == -1) {
-            return false;
-        }
-
-        remove(index);
-        return true;
-    }
-
-    public void clear() {
-        head = null;
-        size = 0;
-    }
-
     public int lastIndexOf(T value) {
         Node<T> current = head;
         int currentIndex = 0;
@@ -248,6 +216,58 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         }
 
         return lastMatchingIndex;
+    }
+
+    public boolean contains(T value) {
+        return indexOf(value) != -1;
+    }
+
+    public boolean remove(T value) {
+        Node<T> previous = null;
+        Node<T> current = head;
+
+        while (current != null) {
+            if (Objects.equals(current.value, value)) {
+                if (previous == null) {
+                    head = current.next;
+                } else {
+                    previous.next = current.next;
+                }
+
+                size--;
+                modCount++;
+                return true;
+            }
+
+            previous = current;
+            current = current.next;
+        }
+
+        return false;
+    }
+
+    public void clear() {
+        if (size == 0) {
+            return;
+        }
+
+        head = null;
+        size = 0;
+        modCount++;
+    }
+
+    public Object[] toArray() {
+        Object[] result = new Object[size];
+        Node<T> current = head;
+        int index = 0;
+
+        while (current != null) {
+            result[index] = current.value;
+            current = current.next;
+            index++;
+        }
+
+        return result;
     }
 
     @Override
@@ -271,30 +291,64 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
 
             private Node<T> current = head;
             private final int expectedModCount = modCount;
 
             @Override
             public boolean hasNext() {
+                checkForConcurrentModification();
                 return current != null;
             }
 
             @Override
             public T next() {
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
+                checkForConcurrentModification();
 
-                if (!hasNext()) {
+                if (current == null) {
                     throw new NoSuchElementException("No more elements");
                 }
 
                 T value = current.value;
                 current = current.next;
+
                 return value;
             }
+
+            private void checkForConcurrentModification() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException(
+                        "List changed after iterator creation"
+                    );
+                }
+            }
         };
+    }
+
+    private Node<T> nodeAt(int index) {
+        Node<T> current = head;
+
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+
+        return current;
+    }
+
+    private void checkElementIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException(
+                "Index: " + index + ", Size: " + size
+            );
+        }
+    }
+
+    private void checkPositionIndex(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException(
+                "Index: " + index + ", Size: " + size
+            );
+        }
     }
 }
