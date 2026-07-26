@@ -34,6 +34,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         newNode.next = head;
         head = newNode;
         size++;
+        modCount++;
     }
 
     public T getFirst() {

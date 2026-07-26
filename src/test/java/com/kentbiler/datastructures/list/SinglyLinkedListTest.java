@@ -271,4 +271,20 @@ class SinglyLinkedListTest {
             iterator::next
         );
     }
+
+    @Test
+    void iteratorDetectsAddFirstAfterCreation() {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.addLast("Menger");
+
+        Iterator<String> iterator = list.iterator();
+
+        list.addFirst("Aristotle");
+
+        assertThrows(
+            ConcurrentModificationException.class,
+            iterator::next
+        );
+    }
 }
