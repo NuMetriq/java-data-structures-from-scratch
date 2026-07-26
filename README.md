@@ -21,3 +21,20 @@ Current features:
 - Enhanced `for` loop support through `Iterable<T>`
 - Fail-fast iterator behavior
 - JUnit test coverage for normal behavior and edge cases
+
+### SinglyLinkedList<T>
+
+A generic singly linked list built from nodes containing a value and a reference to the next node.
+
+Current features:
+
+- Front and end insertion
+- Front and end removal
+- Indexed access, insertion, replacement, and removal
+- Searching with `indexOf`, `lastIndexOf`, and `contains`
+- Removal by value
+- Support for `null` values
+- `clear`, `toArray`, and `toString`
+- Enhanced `for` loop support through `Iterable<T>`
+- Fail-fast iterator behavior
+- JUnit coverage for normal operations, boundary cases, and exceptions
