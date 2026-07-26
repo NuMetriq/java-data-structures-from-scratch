@@ -53,6 +53,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         T removedValue = head.value;
         head = head.next;
         size--;
+        modCount++;
 
         return removedValue;
     }
