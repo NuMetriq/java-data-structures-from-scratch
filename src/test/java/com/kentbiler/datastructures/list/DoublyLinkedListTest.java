@@ -25,4 +25,16 @@ class DoublyLinkedListTest {
         assertEquals(2, list.size());
         assertEquals("Aristotle", list.getFirst());
     }
+
+    @Test
+    void addLastStoresElementAtEnd() {
+        DoublyLinkedList<String> list = new DoublyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+
+        assertEquals(2, list.size());
+        assertEquals("Aristotle", list.getFirst());
+        assertEquals("Menger", list.getLast());
+    }
 }

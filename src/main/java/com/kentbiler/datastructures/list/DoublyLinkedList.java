@@ -47,4 +47,27 @@ public class DoublyLinkedList<T> {
 
         return head.value;
     }
+
+    public void addLast(T value) {
+        Node<T> newNode = new Node<>(value);
+
+        if (tail == null) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            newNode.previous = tail;
+            tail.next = newNode;
+            tail = newNode;
+        }
+
+        size++;
+    }
+
+    public T getLast() {
+        if (tail == null) {
+            throw new NoSuchElementException("List is empty");
+        }
+
+        return tail.value;
+    }
 }
