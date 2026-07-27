@@ -14,4 +14,15 @@ class DoublyLinkedListTest {
         assertEquals(0, list.size());
         assertTrue(list.isEmpty());
     }
+
+    @Test
+    void addFirstStoresElementAtBeginning() {
+        DoublyLinkedList<String> list = new DoublyLinkedList<>();
+
+        list.addFirst("Menger");
+        list.addFirst("Aristotle");
+
+        assertEquals(2, list.size());
+        assertEquals("Aristotle", list.getFirst());
+    }
 }
