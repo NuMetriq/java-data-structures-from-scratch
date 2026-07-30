@@ -37,4 +37,18 @@ class DoublyLinkedListTest {
         assertEquals("Aristotle", list.getFirst());
         assertEquals("Menger", list.getLast());
     }
+
+    @Test
+    void removeFirstReturnsAndRemovesBeginningElement() {
+        DoublyLinkedList<String> list = new DoublyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+
+        String removed = list.removeFirst();
+
+        assertEquals("Aristotle", removed);
+        assertEquals("Menger", list.getFirst());
+        assertEquals(1, list.size());
+    }
 }
