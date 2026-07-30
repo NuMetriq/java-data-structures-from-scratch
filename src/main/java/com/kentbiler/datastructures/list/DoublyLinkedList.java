@@ -90,4 +90,24 @@ public class DoublyLinkedList<T> {
 
         return removedValue;
     }
+
+    public T removeLast() {
+        if (tail == null) {
+            throw new NoSuchElementException("List is empty");
+        }
+
+        T removedValue = tail.value;
+
+        if (head == tail) {
+            head = null;
+            tail = null;
+        } else {
+            tail = tail.previous;
+            tail.next = null;
+        }
+
+        size--;
+
+        return removedValue;
+    }
 }
