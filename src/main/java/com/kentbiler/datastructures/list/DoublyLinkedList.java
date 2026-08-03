@@ -154,4 +154,34 @@ public class DoublyLinkedList<T> {
 
         return previousValue;
     }
+
+    public void add(int index, T value) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException(
+                "Index: " + index + ", Size: " + size
+            );
+        }
+
+        if (index == 0) {
+            addFirst(value);
+            return;
+        }
+
+        if (index == size) {
+            addLast(value);
+            return;
+        }
+
+        Node<T> nextNode = nodeAt(index);
+        Node<T> previousNode = nextNode.previous;
+        Node<T> newNode = new Node<>(value);
+
+        newNode.previous = previousNode;
+        newNode.next = nextNode;
+
+        previousNode.next = newNode;
+        nextNode.previous = newNode;
+
+        size++;
+    }
 }
