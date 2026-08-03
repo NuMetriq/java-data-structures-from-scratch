@@ -1,9 +1,13 @@
 package com.kentbiler.datastructures.list;
 
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
-public class DoublyLinkedList<T> {
-    private static class Node<T> {
+public class DoublyLinkedList<T> implements Iterable<T> {
+
+    private static final class Node<T> {
         private T value;
         private Node<T> previous;
         private Node<T> next;
@@ -16,6 +20,7 @@ public class DoublyLinkedList<T> {
     private Node<T> head;
     private Node<T> tail;
     private int size;
+    private int modCount;
 
     public int size() {
         return size;
@@ -27,17 +32,32 @@ public class DoublyLinkedList<T> {
 
     public void addFirst(T value) {
         Node<T> newNode = new Node<>(value);
+        newNode.next = head;
 
         if (head == null) {
-            head = newNode;
             tail = newNode;
         } else {
-            newNode.next = head;
             head.previous = newNode;
-            head = newNode;
         }
 
+        head = newNode;
         size++;
+        modCount++;
+    }
+
+    public void addLast(T value) {
+        Node<T> newNode = new Node<>(value);
+        newNode.previous = tail;
+
+        if (tail == null) {
+            head = newNode;
+        } else {
+            tail.next = newNode;
+        }
+
+        tail = newNode;
+        size++;
+        modCount++;
     }
 
     public T getFirst() {
@@ -46,21 +66,6 @@ public class DoublyLinkedList<T> {
         }
 
         return head.value;
-    }
-
-    public void addLast(T value) {
-        Node<T> newNode = new Node<>(value);
-
-        if (tail == null) {
-            head = newNode;
-            tail = newNode;
-        } else {
-            newNode.previous = tail;
-            tail.next = newNode;
-            tail = newNode;
-        }
-
-        size++;
     }
 
     public T getLast() {
@@ -76,19 +81,7 @@ public class DoublyLinkedList<T> {
             throw new NoSuchElementException("List is empty");
         }
 
-        T removedValue = head.value;
-
-        if (head == tail) {
-            head = null;
-            tail = null;
-        } else {
-            head = head.next;
-            head.previous = null;
-        }
-
-        size--;
-
-        return removedValue;
+        return unlink(head);
     }
 
     public T removeLast() {
@@ -96,71 +89,11 @@ public class DoublyLinkedList<T> {
             throw new NoSuchElementException("List is empty");
         }
 
-        T removedValue = tail.value;
-
-        if (head == tail) {
-            head = null;
-            tail = null;
-        } else {
-            tail = tail.previous;
-            tail.next = null;
-        }
-
-        size--;
-
-        return removedValue;
-    }
-
-    private void checkIndex(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException(
-                "Index: " + index + ", Size: " + size
-            );
-        }
-    }
-
-    private Node<T> nodeAt(int index) {
-        if (index < size / 2) {
-            Node<T> current = head;
-
-            for (int i = 0; i < index; i++) {
-                current = current.next;
-            }
-
-            return current;
-        }
-
-        Node<T> current = tail;
-
-        for (int i = size - 1; i > index; i--) {
-            current = current.previous;
-        }
-
-        return current;
-    }
-
-    public T get(int index) {
-        checkIndex(index);
-        return nodeAt(index).value;
-    }
-
-    public T set(int index, T value) {
-        checkIndex(index);
-
-        Node<T> node = nodeAt(index);
-        T previousValue = node.value;
-
-        node.value = value;
-
-        return previousValue;
+        return unlink(tail);
     }
 
     public void add(int index, T value) {
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException(
-                "Index: " + index + ", Size: " + size
-            );
-        }
+        checkPositionIndex(index);
 
         if (index == 0) {
             addFirst(value);
@@ -183,28 +116,267 @@ public class DoublyLinkedList<T> {
         nextNode.previous = newNode;
 
         size++;
+        modCount++;
+    }
+
+    public T get(int index) {
+        checkElementIndex(index);
+        return nodeAt(index).value;
+    }
+
+    public T set(int index, T value) {
+        checkElementIndex(index);
+
+        Node<T> node = nodeAt(index);
+        T previousValue = node.value;
+
+        node.value = value;
+
+        return previousValue;
     }
 
     public T remove(int index) {
-        checkIndex(index);
+        checkElementIndex(index);
+        return unlink(nodeAt(index));
+    }
 
-        if (index == 0) {
-            return removeFirst();
+    public int indexOf(T value) {
+        Node<T> current = head;
+        int index = 0;
+
+        while (current != null) {
+            if (Objects.equals(current.value, value)) {
+                return index;
+            }
+
+            current = current.next;
+            index++;
         }
 
-        if (index == size - 1) {
-            return removeLast();
+        return -1;
+    }
+
+    public int lastIndexOf(T value) {
+        Node<T> current = tail;
+        int index = size - 1;
+
+        while (current != null) {
+            if (Objects.equals(current.value, value)) {
+                return index;
+            }
+
+            current = current.previous;
+            index--;
         }
 
-        Node<T> removedNode = nodeAt(index);
-        Node<T> previousNode = removedNode.previous;
-        Node<T> nextNode = removedNode.next;
+        return -1;
+    }
 
-        previousNode.next = nextNode;
-        nextNode.previous = previousNode;
+    public boolean contains(T value) {
+        return indexOf(value) != -1;
+    }
+
+    public boolean remove(T value) {
+        Node<T> current = head;
+
+        while (current != null) {
+            if (Objects.equals(current.value, value)) {
+                unlink(current);
+                return true;
+            }
+
+            current = current.next;
+        }
+
+        return false;
+    }
+
+    public void clear() {
+        if (size == 0) {
+            return;
+        }
+
+        Node<T> current = head;
+
+        while (current != null) {
+            Node<T> nextNode = current.next;
+
+            current.previous = null;
+            current.next = null;
+
+            current = nextNode;
+        }
+
+        head = null;
+        tail = null;
+        size = 0;
+        modCount++;
+    }
+
+    public Object[] toArray() {
+        Object[] result = new Object[size];
+        Node<T> current = head;
+        int index = 0;
+
+        while (current != null) {
+            result[index] = current.value;
+            current = current.next;
+            index++;
+        }
+
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+        Node<T> current = head;
+
+        while (current != null) {
+            result.append(current.value);
+
+            if (current.next != null) {
+                result.append(", ");
+            }
+
+            current = current.next;
+        }
+
+        result.append("]");
+        return result.toString();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<>() {
+
+            private Node<T> current = head;
+            private final int expectedModCount = modCount;
+
+            @Override
+            public boolean hasNext() {
+                checkForConcurrentModification();
+                return current != null;
+            }
+
+            @Override
+            public T next() {
+                checkForConcurrentModification();
+
+                if (current == null) {
+                    throw new NoSuchElementException("No more elements");
+                }
+
+                T value = current.value;
+                current = current.next;
+
+                return value;
+            }
+
+            private void checkForConcurrentModification() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException(
+                        "List changed after iterator creation"
+                    );
+                }
+            }
+        };
+    }
+
+    public Iterator<T> descendingIterator() {
+        return new Iterator<>() {
+
+            private Node<T> current = tail;
+            private final int expectedModCount = modCount;
+
+            @Override
+            public boolean hasNext() {
+                checkForConcurrentModification();
+                return current != null;
+            }
+
+            @Override
+            public T next() {
+                checkForConcurrentModification();
+
+                if (current == null) {
+                    throw new NoSuchElementException("No more elements");
+                }
+
+                T value = current.value;
+                current = current.previous;
+
+                return value;
+            }
+
+            private void checkForConcurrentModification() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException(
+                        "List changed after iterator creation"
+                    );
+                }
+            }
+        };
+    }
+
+    private T unlink(Node<T> node) {
+        Node<T> previousNode = node.previous;
+        Node<T> nextNode = node.next;
+
+        if (previousNode == null) {
+            head = nextNode;
+        } else {
+            previousNode.next = nextNode;
+        }
+
+        if (nextNode == null) {
+            tail = previousNode;
+        } else {
+            nextNode.previous = previousNode;
+        }
+
+        node.previous = null;
+        node.next = null;
 
         size--;
+        modCount++;
 
-        return removedNode.value;
+        return node.value;
+    }
+
+    private Node<T> nodeAt(int index) {
+        if (index < size / 2) {
+            Node<T> current = head;
+
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+
+            return current;
+        }
+
+        Node<T> current = tail;
+
+        for (int i = size - 1; i > index; i--) {
+            current = current.previous;
+        }
+
+        return current;
+    }
+
+    private void checkElementIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException(
+                "Index: " + index + ", Size: " + size
+            );
+        }
+    }
+
+    private void checkPositionIndex(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException(
+                "Index: " + index + ", Size: " + size
+            );
+        }
     }
 }
