@@ -38,3 +38,22 @@ Current features:
 - Enhanced `for` loop support through `Iterable<T>`
 - Fail-fast iterator behavior
 - JUnit coverage for normal operations, boundary cases, and exceptions
+
+### DoublyLinkedList<T>
+
+A generic doubly linked list whose nodes maintain references to both the previous and next nodes.
+
+Current features:
+
+- Constant-time insertion and removal at both ends
+- Direct access to the first and last elements
+- Indexed access, insertion, replacement, and removal
+- Bidirectional traversal from either the head or tail
+- Searching with `indexOf`, `lastIndexOf`, and `contains`
+- Removal by value
+- Support for `null` values
+- `clear`, `toArray`, and `toString`
+- Forward iteration through `Iterable<T>`
+- Reverse iteration through `descendingIterator()`
+- Fail-fast iterator behavior
+- JUnit coverage for normal operations, boundary cases, and exceptions
