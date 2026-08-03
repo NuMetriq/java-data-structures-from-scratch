@@ -107,4 +107,20 @@ class DoublyLinkedListTest {
         assertEquals("Veatch", list.get(2));
         assertEquals(3, list.size());
     }
+
+    @Test
+    void removeAtIndexReturnsElementAndReconnectsList() {
+        DoublyLinkedList<String> list = new DoublyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+        list.addLast("Veatch");
+
+        String removed = list.remove(1);
+
+        assertEquals("Menger", removed);
+        assertEquals("Aristotle", list.get(0));
+        assertEquals("Veatch", list.get(1));
+        assertEquals(2, list.size());
+    }
 }
