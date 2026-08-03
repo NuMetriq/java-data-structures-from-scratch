@@ -78,4 +78,18 @@ class DoublyLinkedListTest {
         assertEquals("Menger", list.get(1));
         assertEquals("Veatch", list.get(2));
     }
+
+    @Test
+    void setReplacesAndReturnsPreviousValue() {
+        DoublyLinkedList<String> list = new DoublyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+
+        String previousValue = list.set(1, "Veatch");
+
+        assertEquals("Menger", previousValue);
+        assertEquals("Veatch", list.get(1));
+        assertEquals(2, list.size());
+    }
 }

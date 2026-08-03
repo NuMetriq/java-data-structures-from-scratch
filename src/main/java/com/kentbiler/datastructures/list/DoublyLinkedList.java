@@ -143,4 +143,15 @@ public class DoublyLinkedList<T> {
         checkIndex(index);
         return nodeAt(index).value;
     }
+
+    public T set(int index, T value) {
+        checkIndex(index);
+
+        Node<T> node = nodeAt(index);
+        T previousValue = node.value;
+
+        node.value = value;
+
+        return previousValue;
+    }
 }
