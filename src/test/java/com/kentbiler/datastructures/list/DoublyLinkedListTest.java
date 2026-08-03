@@ -65,4 +65,17 @@ class DoublyLinkedListTest {
         assertEquals("Aristotle", list.getLast());
         assertEquals(1, list.size());
     }
+
+    @Test
+    void getReturnsElementAtIndex() {
+        DoublyLinkedList<String> list = new DoublyLinkedList<>();
+
+        list.addLast("Aristotle");
+        list.addLast("Menger");
+        list.addLast("Veatch");
+
+        assertEquals("Aristotle", list.get(0));
+        assertEquals("Menger", list.get(1));
+        assertEquals("Veatch", list.get(2));
+    }
 }

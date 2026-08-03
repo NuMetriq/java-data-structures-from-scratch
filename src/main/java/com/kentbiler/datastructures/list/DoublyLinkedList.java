@@ -110,4 +110,37 @@ public class DoublyLinkedList<T> {
 
         return removedValue;
     }
+
+    private void checkIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException(
+                "Index: " + index + ", Size: " + size
+            );
+        }
+    }
+
+    private Node<T> nodeAt(int index) {
+        if (index < size / 2) {
+            Node<T> current = head;
+
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+
+            return current;
+        }
+
+        Node<T> current = tail;
+
+        for (int i = size - 1; i > index; i--) {
+            current = current.previous;
+        }
+
+        return current;
+    }
+
+    public T get(int index) {
+        checkIndex(index);
+        return nodeAt(index).value;
+    }
 }
