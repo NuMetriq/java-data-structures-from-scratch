@@ -27,4 +27,12 @@ public class ArrayStack<T> {
 
         return elements.get(elements.size() - 1);
     }
+
+    public T pop() {
+        if (elements.isEmpty()) {
+            throw new NoSuchElementException("Stack is empty");
+        }
+
+        return elements.remove(elements.size() - 1);
+    }
 }

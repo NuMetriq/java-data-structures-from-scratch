@@ -25,4 +25,18 @@ class ArrayStackTest {
         assertEquals(2, stack.size());
         assertEquals("Menger", stack.peek());
     }
+
+    @Test
+    void popRemovesAndReturnsTopElement() {
+        ArrayStack<String> stack = new ArrayStack<>();
+
+        stack.push("Aristotle");
+        stack.push("Menger");
+
+        String removed = stack.pop();
+
+        assertEquals("Menger", removed);
+        assertEquals("Aristotle", stack.peek());
+        assertEquals(1, stack.size());
+    }
 }
