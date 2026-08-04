@@ -14,4 +14,15 @@ class ArrayStackTest {
         assertEquals(0, stack.size());
         assertTrue(stack.isEmpty());
     }
+
+    @Test
+    void pushAddsElementToTop() {
+        ArrayStack<String> stack = new ArrayStack<>();
+
+        stack.push("Aristotle");
+        stack.push("Menger");
+
+        assertEquals(2, stack.size());
+        assertEquals("Menger", stack.peek());
+    }
 }
