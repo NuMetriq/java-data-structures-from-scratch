@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -122,5 +123,17 @@ class ArrayStackTest {
         stack.push("Veatch");
 
         assertThrows(ConcurrentModificationException.class, iterator::next);
+    }
+
+    @Test
+    void iteratorThrowsWhenExhausted() {
+        ArrayStack<String> stack = new ArrayStack<>();
+        stack.push("Aristotle");
+
+        Iterator<String> iterator = stack.iterator();
+
+        assertEquals("Aristotle", iterator.next());
+        assertFalse(iterator.hasNext());
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 }
