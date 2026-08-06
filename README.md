@@ -72,3 +72,18 @@ Current features:
 - Top-to-bottom iteration
 - Fail-fast iterator
 - Empty-operation validation
+
+### LinkedStack
+
+A linked-list-backed implementation of a generic stack using `SinglyLinkedList` internally.
+
+Current features:
+
+- Generic element type
+- Last-in, first-out ordering
+- `push`, `pop`, and `peek`
+- `size`, `isEmpty`, and `clear`
+- Top-to-bottom iteration
+- Fail-fast iteration
+- Constant-time `push`, `pop`, and `peek`
+- Empty-operation validation
