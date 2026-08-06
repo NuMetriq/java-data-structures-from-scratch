@@ -64,4 +64,15 @@ class ArrayStackTest {
         assertTrue(stack.isEmpty());
         assertThrows(NoSuchElementException.class, stack::peek);
     }
+
+    @Test
+    void toStringDisplaysElementsFromBottomToTop() {
+        ArrayStack<String> stack = new ArrayStack<>();
+
+        stack.push("Aristotle");
+        stack.push("Menger");
+        stack.push("Veatch");
+
+        assertEquals("[Aristotle, Menger, Veatch]", stack.toString());
+    }
 }

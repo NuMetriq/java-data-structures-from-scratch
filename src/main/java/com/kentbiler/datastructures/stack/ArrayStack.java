@@ -39,4 +39,9 @@ public class ArrayStack<T> {
     public void clear() {
         elements.clear();
     }
+
+    @Override
+    public String toString() {
+        return elements.toString();
+    }
 }
