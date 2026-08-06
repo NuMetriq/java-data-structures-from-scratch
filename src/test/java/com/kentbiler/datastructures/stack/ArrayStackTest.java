@@ -50,4 +50,18 @@ class ArrayStackTest {
         assertThrows(NoSuchElementException.class, stack::peek);
         assertThrows(NoSuchElementException.class, stack::pop);
     }
+
+    @Test
+    void clearRemovesAllElements() {
+        ArrayStack<String> stack = new ArrayStack<>();
+
+        stack.push("Aristotle");
+        stack.push("Menger");
+
+        stack.clear();
+
+        assertEquals(0, stack.size());
+        assertTrue(stack.isEmpty());
+        assertThrows(NoSuchElementException.class, stack::peek);
+    }
 }

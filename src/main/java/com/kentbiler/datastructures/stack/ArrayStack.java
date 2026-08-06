@@ -35,4 +35,8 @@ public class ArrayStack<T> {
 
         return elements.remove(elements.size() - 1);
     }
+
+    public void clear() {
+        elements.clear();
+    }
 }
