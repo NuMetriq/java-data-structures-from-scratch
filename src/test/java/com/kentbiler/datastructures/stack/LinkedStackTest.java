@@ -111,4 +111,16 @@ class LinkedStackTest {
 
         assertThrows(ConcurrentModificationException.class, iterator::next);
     }
+
+    @Test
+    void iteratorThrowsWhenExhausted() {
+        LinkedStack<String> stack = new LinkedStack<>();
+        stack.push("Aristotle");
+
+        Iterator<String> iterator = stack.iterator();
+
+        assertEquals("Aristotle", iterator.next());
+        assertFalse(iterator.hasNext());
+        assertThrows(NoSuchElementException.class, iterator::next);
+    }
 }
