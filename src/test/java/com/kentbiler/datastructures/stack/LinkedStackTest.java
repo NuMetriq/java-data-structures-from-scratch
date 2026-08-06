@@ -78,4 +78,21 @@ class LinkedStackTest {
         assertEquals("Aristotle", stack.pop());
         assertTrue(stack.isEmpty());
     }
+
+    @Test
+    void iteratorVisitsElementsFromTopToBottom() {
+        LinkedStack<String> stack = new LinkedStack<>();
+
+        stack.push("Aristotle");
+        stack.push("Menger");
+        stack.push("Veatch");
+
+        StringBuilder result = new StringBuilder();
+
+        for (String value : stack) {
+            result.append(value).append(",");
+        }
+
+        assertEquals("Veatch,Menger,Aristotle,", result.toString());
+    }
 }

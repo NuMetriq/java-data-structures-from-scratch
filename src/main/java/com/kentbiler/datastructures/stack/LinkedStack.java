@@ -2,7 +2,9 @@ package com.kentbiler.datastructures.stack;
 
 import com.kentbiler.datastructures.list.SinglyLinkedList;
 
-public class LinkedStack<T> implements Stack<T> {
+import java.util.Iterator;
+
+public class LinkedStack<T> implements Stack<T>, Iterable<T> {
 
     private final SinglyLinkedList<T> elements = new SinglyLinkedList<>();
 
@@ -34,5 +36,10 @@ public class LinkedStack<T> implements Stack<T> {
     @Override
     public T pop() {
         return elements.removeFirst();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return elements.iterator();
     }
 }
