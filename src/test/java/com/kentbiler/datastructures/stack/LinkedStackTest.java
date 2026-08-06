@@ -64,4 +64,18 @@ class LinkedStackTest {
         assertEquals(0, stack.size());
         assertThrows(NoSuchElementException.class, stack::peek);
     }
+
+    @Test
+    void popReturnsElementsInLastInFirstOutOrder() {
+        LinkedStack<String> stack = new LinkedStack<>();
+
+        stack.push("Aristotle");
+        stack.push("Menger");
+        stack.push("Veatch");
+
+        assertEquals("Veatch", stack.pop());
+        assertEquals("Menger", stack.pop());
+        assertEquals("Aristotle", stack.pop());
+        assertTrue(stack.isEmpty());
+    }
 }
