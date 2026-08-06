@@ -1,0 +1,38 @@
+package com.kentbiler.datastructures.stack;
+
+import com.kentbiler.datastructures.list.SinglyLinkedList;
+
+public class LinkedStack<T> implements Stack<T> {
+
+    private final SinglyLinkedList<T> elements = new SinglyLinkedList<>();
+
+    @Override
+    public int size() {
+        return elements.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return elements.isEmpty();
+    }
+
+    @Override
+    public void push(T value) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public T pop() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public T peek() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void clear() {
+        throw new UnsupportedOperationException();
+    }
+}
