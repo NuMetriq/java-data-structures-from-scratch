@@ -1,5 +1,7 @@
 package com.kentbiler.datastructures.stack;
 
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
@@ -94,5 +96,19 @@ class LinkedStackTest {
         }
 
         assertEquals("Veatch,Menger,Aristotle,", result.toString());
+    }
+
+    @Test
+    void iteratorDetectsStructuralModification() {
+        LinkedStack<String> stack = new LinkedStack<>();
+
+        stack.push("Aristotle");
+        stack.push("Menger");
+
+        Iterator<String> iterator = stack.iterator();
+
+        stack.push("Veatch");
+
+        assertThrows(ConcurrentModificationException.class, iterator::next);
     }
 }
