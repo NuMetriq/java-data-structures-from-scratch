@@ -50,4 +50,18 @@ class LinkedStackTest {
         assertThrows(NoSuchElementException.class, stack::peek);
         assertThrows(NoSuchElementException.class, stack::pop);
     }
+
+    @Test
+    void clearRemovesAllElements() {
+        LinkedStack<String> stack = new LinkedStack<>();
+
+        stack.push("Aristotle");
+        stack.push("Menger");
+
+        stack.clear();
+
+        assertTrue(stack.isEmpty());
+        assertEquals(0, stack.size());
+        assertThrows(NoSuchElementException.class, stack::peek);
+    }
 }

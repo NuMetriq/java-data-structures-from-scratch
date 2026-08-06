@@ -18,7 +18,7 @@ public class LinkedStack<T> implements Stack<T> {
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException();
+        elements.clear();
     }
 
     @Override
