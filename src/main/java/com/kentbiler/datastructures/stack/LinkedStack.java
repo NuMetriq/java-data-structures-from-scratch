@@ -17,22 +17,22 @@ public class LinkedStack<T> implements Stack<T> {
     }
 
     @Override
-    public void push(T value) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public T pop() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public T peek() {
         throw new UnsupportedOperationException();
     }
 
     @Override
     public void clear() {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void push(T value) {
+       elements.addFirst(value);
+    }
+
+    @Override
+    public T peek() {
+        return elements.getFirst();
     }
 }
