@@ -6,7 +6,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayStack<T> implements Iterable<T> {
+public class ArrayStack<T> implements Stack<T>, Iterable<T> {
 
     private final DynamicArray<T> elements = new DynamicArray<>();
 
