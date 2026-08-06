@@ -17,11 +17,6 @@ public class LinkedStack<T> implements Stack<T> {
     }
 
     @Override
-    public T pop() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public void clear() {
         throw new UnsupportedOperationException();
     }
@@ -34,5 +29,10 @@ public class LinkedStack<T> implements Stack<T> {
     @Override
     public T peek() {
         return elements.getFirst();
+    }
+
+    @Override
+    public T pop() {
+        return elements.removeFirst();
     }
 }

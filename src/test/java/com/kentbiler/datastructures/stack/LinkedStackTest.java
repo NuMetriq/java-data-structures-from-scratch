@@ -27,4 +27,16 @@ class LinkedStackTest {
         assertEquals("Menger", stack.peek());
         assertFalse(stack.isEmpty());
     }
+
+    @Test
+    void popRemovesAndReturnsTopElement() {
+        LinkedStack<String> stack = new LinkedStack<>();
+
+        stack.push("Aristotle");
+        stack.push("Menger");
+
+        assertEquals("Menger", stack.pop());
+        assertEquals("Aristotle", stack.peek());
+        assertEquals(1, stack.size());
+    }
 }
