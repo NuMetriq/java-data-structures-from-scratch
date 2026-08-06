@@ -75,4 +75,18 @@ class ArrayStackTest {
 
         assertEquals("[Aristotle, Menger, Veatch]", stack.toString());
     }
+
+    @Test
+    void popReturnsElementsInLastInFirstOutOrder() {
+        ArrayStack<String> stack = new ArrayStack<>();
+
+        stack.push("Aristotle");
+        stack.push("Menger");
+        stack.push("Veatch");
+
+        assertEquals("Veatch", stack.pop());
+        assertEquals("Menger", stack.pop());
+        assertEquals("Aristotle", stack.pop());
+        assertTrue(stack.isEmpty());
+    }
 }
