@@ -2,12 +2,15 @@ package com.kentbiler.datastructures.stack;
 
 import com.kentbiler.datastructures.list.DynamicArray;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class ArrayStack<T> implements Iterable<T> {
 
     private final DynamicArray<T> elements = new DynamicArray<>();
+
+    private int modCount;
 
     public int size() {
         return elements.size();
@@ -19,6 +22,7 @@ public class ArrayStack<T> implements Iterable<T> {
 
     public void push(T value) {
         elements.add(value);
+        modCount++;
     }
 
     public T peek() {
@@ -34,11 +38,16 @@ public class ArrayStack<T> implements Iterable<T> {
             throw new NoSuchElementException("Stack is empty");
         }
 
-        return elements.remove(elements.size() - 1);
+        T value = elements.remove(elements.size() - 1);
+        modCount++;
+        return value;
     }
 
     public void clear() {
-        elements.clear();
+        if (!elements.isEmpty()) {
+            elements.clear();
+            modCount++;
+        }
     }
 
     @Override
@@ -50,15 +59,25 @@ public class ArrayStack<T> implements Iterable<T> {
     public Iterator<T> iterator() {
         return new Iterator<>() {
             private int currentIndex = elements.size() - 1;
+            private final int expectedModCount = modCount;
+
+            private void checkForModification() {
+                if (expectedModCount != ArrayStack.this.modCount) {
+                    throw new ConcurrentModificationException();
+                }
+            }
 
             @Override
             public boolean hasNext() {
+                checkForModification();
                 return currentIndex >= 0;
             }
 
             @Override
             public T next() {
-                if (!hasNext()) {
+                checkForModification();
+
+                if (currentIndex < 0) {
                     throw new NoSuchElementException();
                 }
 
