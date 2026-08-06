@@ -89,4 +89,21 @@ class ArrayStackTest {
         assertEquals("Aristotle", stack.pop());
         assertTrue(stack.isEmpty());
     }
+
+    @Test
+    void iteratorVisitsElementsFromTopToBottom() {
+        ArrayStack<String> stack = new ArrayStack<>();
+
+        stack.push("Aristotle");
+        stack.push("Menger");
+        stack.push("Veatch");
+
+        StringBuilder result = new StringBuilder();
+
+        for (String value : stack) {
+            result.append(value).append(",");
+        }
+
+        assertEquals("Veatch,Menger,Aristotle,", result.toString());
+    }
 }
