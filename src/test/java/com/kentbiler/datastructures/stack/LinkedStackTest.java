@@ -1,9 +1,12 @@
 package com.kentbiler.datastructures.stack;
 
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LinkedStackTest {
@@ -38,5 +41,13 @@ class LinkedStackTest {
         assertEquals("Menger", stack.pop());
         assertEquals("Aristotle", stack.peek());
         assertEquals(1, stack.size());
+    }
+
+    @Test
+    void peekAndPopRejectEmptyStack() {
+        LinkedStack<String> stack = new LinkedStack<>();
+
+        assertThrows(NoSuchElementException.class, stack::peek);
+        assertThrows(NoSuchElementException.class, stack::pop);
     }
 }
