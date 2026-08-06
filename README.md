@@ -57,3 +57,18 @@ Current features:
 - Reverse iteration through `descendingIterator()`
 - Fail-fast iterator behavior
 - JUnit coverage for normal operations, boundary cases, and exceptions
+
+### ArrayStack
+
+An array-backed implementation of a generic stack using `DynamicArray` internally.
+
+Current features:
+
+- Generic element type
+- Last-in, first-out ordering
+- `push`, `pop`, and `peek`
+- `size`, `isEmpty`, and `clear`
+- Bottom-to-top string representation
+- Top-to-bottom iteration
+- Fail-fast iterator
+- Empty-operation validation
