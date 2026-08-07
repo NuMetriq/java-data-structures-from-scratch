@@ -1,8 +1,11 @@
 package com.kentbiler.datastructures.queue;
 
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LinkedDequeTest {
@@ -40,5 +43,15 @@ class LinkedDequeTest {
         assertEquals("Veatch", deque.removeLast());
         assertEquals("Menger", deque.peekFirst());
         assertEquals(1, deque.size());
+    }
+
+    @Test
+    void peekAndRemoveRejectEmptyDeque() {
+        LinkedDeque<String> deque = new LinkedDeque<>();
+
+        assertThrows(NoSuchElementException.class, deque::peekFirst);
+        assertThrows(NoSuchElementException.class, deque::peekLast);
+        assertThrows(NoSuchElementException.class, deque::removeFirst);
+        assertThrows(NoSuchElementException.class, deque::removeLast);
     }
 }
