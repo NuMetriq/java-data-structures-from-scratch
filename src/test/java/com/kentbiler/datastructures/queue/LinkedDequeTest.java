@@ -1,5 +1,6 @@
 package com.kentbiler.datastructures.queue;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -101,5 +102,21 @@ class LinkedDequeTest {
         assertEquals("Veatch", iterator.next());
         assertEquals("Menger", iterator.next());
         assertEquals("Aristotle", iterator.next());
+    }
+
+    @Test
+    void iteratorsDetectStructuralModification() {
+        LinkedDeque<String> deque = new LinkedDeque<>();
+
+        deque.addLast("Aristotle");
+        deque.addLast("Menger");
+
+        Iterator<String> forward = deque.iterator();
+        Iterator<String> backward = deque.descendingIterator();
+
+        deque.addLast("Veatch");
+
+        assertThrows(ConcurrentModificationException.class, forward::next);
+        assertThrows(ConcurrentModificationException.class, backward::next);
     }
 }
