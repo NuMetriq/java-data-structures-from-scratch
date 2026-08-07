@@ -64,4 +64,18 @@ class LinkedQueueTest {
         assertThrows(NoSuchElementException.class, queue::peek);
         assertThrows(NoSuchElementException.class, queue::dequeue);
     }
+
+    @Test
+    void clearRemovesAllElements() {
+        LinkedQueue<String> queue = new LinkedQueue<>();
+
+        queue.enqueue("Aristotle");
+        queue.enqueue("Menger");
+
+        queue.clear();
+
+        assertTrue(queue.isEmpty());
+        assertEquals(0, queue.size());
+        assertThrows(NoSuchElementException.class, queue::peek);
+    }
 }

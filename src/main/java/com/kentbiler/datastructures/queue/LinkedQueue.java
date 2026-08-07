@@ -33,6 +33,6 @@ public class LinkedQueue<T> implements Queue<T> {
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException();
+        elements.clear();
     }
 }
