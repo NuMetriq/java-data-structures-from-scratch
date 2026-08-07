@@ -78,4 +78,21 @@ class LinkedQueueTest {
         assertEquals(0, queue.size());
         assertThrows(NoSuchElementException.class, queue::peek);
     }
+
+    @Test
+    void iteratorVisitsElementsFromFrontToBack() {
+        LinkedQueue<String> queue = new LinkedQueue<>();
+
+        queue.enqueue("Aristotle");
+        queue.enqueue("Menger");
+        queue.enqueue("Veatch");
+
+        StringBuilder result = new StringBuilder();
+
+        for (String value : queue) {
+            result.append(value).append(",");
+        }
+
+        assertEquals("Aristotle,Menger,Veatch,", result.toString());
+    }
 }
