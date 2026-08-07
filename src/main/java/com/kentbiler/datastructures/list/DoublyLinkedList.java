@@ -32,30 +32,32 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
     public void addFirst(T value) {
         Node<T> newNode = new Node<>(value);
-        newNode.next = head;
 
-        if (head == null) {
+        if (isEmpty()) {
+            head = newNode;
             tail = newNode;
         } else {
+            newNode.next = head;
             head.previous = newNode;
+            head = newNode;
         }
 
-        head = newNode;
         size++;
         modCount++;
     }
 
     public void addLast(T value) {
         Node<T> newNode = new Node<>(value);
-        newNode.previous = tail;
 
-        if (tail == null) {
+        if (isEmpty()) {
             head = newNode;
+            tail = newNode;
         } else {
+            newNode.previous = tail;
             tail.next = newNode;
+            tail = newNode;
         }
 
-        tail = newNode;
         size++;
         modCount++;
     }

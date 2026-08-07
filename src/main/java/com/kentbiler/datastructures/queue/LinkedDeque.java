@@ -18,12 +18,12 @@ public class LinkedDeque<T> implements Deque<T> {
 
     @Override
     public void addFirst(T value) {
-        throw new UnsupportedOperationException();
+        elements.addFirst(value);
     }
 
     @Override
     public void addLast(T value) {
-        throw new UnsupportedOperationException();
+        elements.addLast(value);
     }
 
     @Override
@@ -38,12 +38,12 @@ public class LinkedDeque<T> implements Deque<T> {
 
     @Override
     public T peekFirst() {
-        throw new UnsupportedOperationException();
+        return elements.getFirst();
     }
 
     @Override
     public T peekLast() {
-        throw new UnsupportedOperationException();
+        return elements.getLast();
     }
 
     @Override

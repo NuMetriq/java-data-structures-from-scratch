@@ -14,4 +14,17 @@ class LinkedDequeTest {
         assertTrue(deque.isEmpty());
         assertEquals(0, deque.size());
     }
+
+    @Test
+    void addFirstAndLastPlaceElementsAtCorrectEnds() {
+        LinkedDeque<String> deque = new LinkedDeque<>();
+
+        deque.addFirst("Menger");
+        deque.addFirst("Aristotle");
+        deque.addLast("Veatch");
+
+        assertEquals(3, deque.size());
+        assertEquals("Aristotle", deque.peekFirst());
+        assertEquals("Veatch", deque.peekLast());
+    }
 }
