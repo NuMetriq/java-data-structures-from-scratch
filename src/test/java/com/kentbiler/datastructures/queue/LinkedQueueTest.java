@@ -27,4 +27,16 @@ class LinkedQueueTest {
         assertEquals("Aristotle", queue.peek());
         assertFalse(queue.isEmpty());
     }
+
+    @Test
+    void dequeueRemovesAndReturnsFrontElement() {
+        LinkedQueue<String> queue = new LinkedQueue<>();
+
+        queue.enqueue("Aristotle");
+        queue.enqueue("Menger");
+
+        assertEquals("Aristotle", queue.dequeue());
+        assertEquals("Menger", queue.peek());
+        assertEquals(1, queue.size());
+    }
 }

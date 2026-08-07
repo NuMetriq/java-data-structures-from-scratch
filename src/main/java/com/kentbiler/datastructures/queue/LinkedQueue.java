@@ -23,7 +23,7 @@ public class LinkedQueue<T> implements Queue<T> {
 
     @Override
     public T dequeue() {
-        throw new UnsupportedOperationException();
+        return elements.removeFirst();
     }
 
     @Override
