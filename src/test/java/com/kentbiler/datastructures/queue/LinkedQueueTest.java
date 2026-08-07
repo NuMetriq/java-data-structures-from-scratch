@@ -39,4 +39,18 @@ class LinkedQueueTest {
         assertEquals("Menger", queue.peek());
         assertEquals(1, queue.size());
     }
+
+    @Test
+    void dequeueReturnsElementsInFirstInFirstOutOrder() {
+        LinkedQueue<String> queue = new LinkedQueue<>();
+
+        queue.enqueue("Aristotle");
+        queue.enqueue("Menger");
+        queue.enqueue("Veatch");
+
+        assertEquals("Aristotle", queue.dequeue());
+        assertEquals("Menger", queue.dequeue());
+        assertEquals("Veatch", queue.dequeue());
+        assertTrue(queue.isEmpty());
+    }
 }
