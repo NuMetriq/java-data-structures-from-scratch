@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -118,5 +119,22 @@ class LinkedDequeTest {
 
         assertThrows(ConcurrentModificationException.class, forward::next);
         assertThrows(ConcurrentModificationException.class, backward::next);
+    }
+
+    @Test
+    void iteratorsThrowWhenExhausted() {
+        LinkedDeque<String> deque = new LinkedDeque<>();
+        deque.addLast("Aristotle");
+
+        Iterator<String> forward = deque.iterator();
+        Iterator<String> backward = deque.descendingIterator();
+
+        assertEquals("Aristotle", forward.next());
+        assertFalse(forward.hasNext());
+        assertThrows(NoSuchElementException.class, forward::next);
+
+        assertEquals("Aristotle", backward.next());
+        assertFalse(backward.hasNext());
+        assertThrows(NoSuchElementException.class, backward::next);
     }
 }
