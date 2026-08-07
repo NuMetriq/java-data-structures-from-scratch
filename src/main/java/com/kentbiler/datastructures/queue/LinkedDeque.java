@@ -48,6 +48,6 @@ public class LinkedDeque<T> implements Deque<T> {
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException();
+        elements.clear();
     }
 }

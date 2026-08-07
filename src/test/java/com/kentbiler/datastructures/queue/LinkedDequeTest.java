@@ -54,4 +54,19 @@ class LinkedDequeTest {
         assertThrows(NoSuchElementException.class, deque::removeFirst);
         assertThrows(NoSuchElementException.class, deque::removeLast);
     }
+
+    @Test
+    void clearRemovesAllElements() {
+        LinkedDeque<String> deque = new LinkedDeque<>();
+
+        deque.addFirst("Aristotle");
+        deque.addLast("Menger");
+        deque.addLast("Veatch");
+
+        deque.clear();
+
+        assertTrue(deque.isEmpty());
+        assertEquals(0, deque.size());
+        assertThrows(NoSuchElementException.class, deque::peekFirst);
+    }
 }
