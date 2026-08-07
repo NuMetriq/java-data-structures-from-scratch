@@ -28,12 +28,12 @@ public class LinkedDeque<T> implements Deque<T> {
 
     @Override
     public T removeFirst() {
-        throw new UnsupportedOperationException();
+        return elements.removeFirst();
     }
 
     @Override
     public T removeLast() {
-        throw new UnsupportedOperationException();
+        return elements.removeLast();
     }
 
     @Override

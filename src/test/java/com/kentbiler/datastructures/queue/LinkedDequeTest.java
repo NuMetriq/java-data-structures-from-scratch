@@ -27,4 +27,18 @@ class LinkedDequeTest {
         assertEquals("Aristotle", deque.peekFirst());
         assertEquals("Veatch", deque.peekLast());
     }
+
+    @Test
+    void removeFirstAndRemoveLastReturnCorrectElements() {
+        LinkedDeque<String> deque = new LinkedDeque<>();
+
+        deque.addLast("Aristotle");
+        deque.addLast("Menger");
+        deque.addLast("Veatch");
+
+        assertEquals("Aristotle", deque.removeFirst());
+        assertEquals("Veatch", deque.removeLast());
+        assertEquals("Menger", deque.peekFirst());
+        assertEquals(1, deque.size());
+    }
 }
