@@ -18,7 +18,7 @@ public class LinkedQueue<T> implements Queue<T> {
 
     @Override
     public void enqueue(T value) {
-        throw new UnsupportedOperationException();
+        elements.addLast(value);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class LinkedQueue<T> implements Queue<T> {
 
     @Override
     public T peek() {
-        throw new UnsupportedOperationException();
+        return elements.getFirst();
     }
 
     @Override
