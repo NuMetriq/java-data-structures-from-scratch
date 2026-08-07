@@ -102,3 +102,20 @@ Current features:
 - Fail-fast iterator
 - Constant-time `enqueue`, `dequeue`, and `peek`
 - Empty-operation validation
+
+### LinkedDeque
+
+A doubly linked implementation of a generic double-ended queue using `DoublyLinkedList` internally.
+
+Current features:
+
+- Generic element type
+- Add and remove from both ends
+- `addFirst`, `addLast`, `removeFirst`, and `removeLast`
+- `peekFirst` and `peekLast`
+- `size`, `isEmpty`, and `clear`
+- Forward iteration from first to last
+- Descending iteration from last to first
+- Fail-fast iterators
+- Constant-time operations at both ends
+- Empty-operation validation
