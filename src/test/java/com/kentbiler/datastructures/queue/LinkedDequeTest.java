@@ -1,5 +1,6 @@
 package com.kentbiler.datastructures.queue;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
@@ -85,5 +86,20 @@ class LinkedDequeTest {
         }
 
         assertEquals("Aristotle,Menger,Veatch,", result.toString());
+    }
+
+    @Test
+    void descendingIteratorVisitsElementsFromLastToFirst() {
+        LinkedDeque<String> deque = new LinkedDeque<>();
+
+        deque.addLast("Aristotle");
+        deque.addLast("Menger");
+        deque.addLast("Veatch");
+
+        Iterator<String> iterator = deque.descendingIterator();
+
+        assertEquals("Veatch", iterator.next());
+        assertEquals("Menger", iterator.next());
+        assertEquals("Aristotle", iterator.next());
     }
 }

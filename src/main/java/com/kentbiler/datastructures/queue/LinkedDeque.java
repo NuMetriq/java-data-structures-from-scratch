@@ -57,4 +57,8 @@ public class LinkedDeque<T> implements Deque<T>, Iterable<T> {
     public Iterator<T> iterator() {
         return elements.iterator();
     }
+
+    public Iterator<T> descendingIterator() {
+        return elements.descendingIterator();
+    }
 }
