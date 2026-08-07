@@ -87,3 +87,18 @@ Current features:
 - Fail-fast iteration
 - Constant-time `push`, `pop`, and `peek`
 - Empty-operation validation
+
+### LinkedQueue
+
+A linked-list-backed implementation of a generic queue using `DoublyLinkedList` internally.
+
+Current features:
+
+- Generic element type
+- First-in, first-out ordering
+- `enqueue`, `dequeue`, and `peek`
+- `size`, `isEmpty`, and `clear`
+- Front-to-back iteration
+- Fail-fast iterator
+- Constant-time `enqueue`, `dequeue`, and `peek`
+- Empty-operation validation
