@@ -111,4 +111,16 @@ class LinkedQueueTest {
 
         assertThrows(ConcurrentModificationException.class, iterator::next);
     }
+
+    @Test
+    void iteratorThrowsWhenExhausted() {
+        LinkedQueue<String> queue = new LinkedQueue<>();
+        queue.enqueue("Aristotle");
+
+        Iterator<String> iterator = queue.iterator();
+
+        assertEquals("Aristotle", iterator.next());
+        assertFalse(iterator.hasNext());
+        assertThrows(NoSuchElementException.class, iterator::next);
+    }
 }
