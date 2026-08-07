@@ -69,4 +69,21 @@ class LinkedDequeTest {
         assertEquals(0, deque.size());
         assertThrows(NoSuchElementException.class, deque::peekFirst);
     }
+
+    @Test
+    void iteratorVisitsElementsFromFirstToLast() {
+        LinkedDeque<String> deque = new LinkedDeque<>();
+
+        deque.addLast("Aristotle");
+        deque.addLast("Menger");
+        deque.addLast("Veatch");
+
+        StringBuilder result = new StringBuilder();
+
+        for (String value : deque) {
+            result.append(value).append(",");
+        }
+
+        assertEquals("Aristotle,Menger,Veatch,", result.toString());
+    }
 }

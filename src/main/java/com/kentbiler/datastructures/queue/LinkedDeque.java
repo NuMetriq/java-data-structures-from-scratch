@@ -2,7 +2,9 @@ package com.kentbiler.datastructures.queue;
 
 import com.kentbiler.datastructures.list.DoublyLinkedList;
 
-public class LinkedDeque<T> implements Deque<T> {
+import java.util.Iterator;
+
+public class LinkedDeque<T> implements Deque<T>, Iterable<T> {
 
     private final DoublyLinkedList<T> elements = new DoublyLinkedList<>();
 
@@ -49,5 +51,10 @@ public class LinkedDeque<T> implements Deque<T> {
     @Override
     public void clear() {
         elements.clear();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return elements.iterator();
     }
 }
