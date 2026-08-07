@@ -1,5 +1,7 @@
 package com.kentbiler.datastructures.queue;
 
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
@@ -94,5 +96,19 @@ class LinkedQueueTest {
         }
 
         assertEquals("Aristotle,Menger,Veatch,", result.toString());
+    }
+
+    @Test
+    void iteratorDetectsStructuralModification() {
+        LinkedQueue<String> queue = new LinkedQueue<>();
+
+        queue.enqueue("Aristotle");
+        queue.enqueue("Menger");
+
+        Iterator<String> iterator = queue.iterator();
+
+        queue.enqueue("Veatch");
+
+        assertThrows(ConcurrentModificationException.class, iterator::next);
     }
 }
