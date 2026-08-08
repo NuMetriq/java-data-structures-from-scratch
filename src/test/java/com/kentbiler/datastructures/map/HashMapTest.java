@@ -100,4 +100,24 @@ class HashMapTest {
         assertFalse(map.containsKey("Aristotle"));
         assertEquals(2, map.get("Menger"));
     }
+
+    @Test
+    void removeHandlesHashCollisions() {
+        HashMap<CollisionKey, Integer> map = new HashMap<>();
+
+        CollisionKey first = new CollisionKey("Aristotle");
+        CollisionKey second = new CollisionKey("Menger");
+        CollisionKey third = new CollisionKey("Veatch");
+
+        map.put(first, 1);
+        map.put(second, 2);
+        map.put(third, 3);
+
+        assertEquals(2, map.remove(second));
+
+        assertEquals(2, map.size());
+        assertEquals(1, map.get(first));
+        assertEquals(3, map.get(third));
+        assertFalse(map.containsKey(second));
+    }
 }
