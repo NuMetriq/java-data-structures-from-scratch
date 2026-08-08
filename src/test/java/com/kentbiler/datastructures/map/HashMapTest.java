@@ -137,4 +137,17 @@ class HashMapTest {
         assertFalse(map.containsKey("Menger"));
         assertFalse(map.containsKey("Veatch"));
     }
+
+    @Test
+    void growsWhenMapBecomesTooFull() {
+        HashMap<Integer, String> map = new HashMap<>();
+
+        int initialCapacity = map.capacity();
+
+        for (int i = 0; i < 13; i++) {
+            map.put(i, "Value " + i);
+        }
+
+        assertTrue(map.capacity() > initialCapacity);
+    }
 }

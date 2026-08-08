@@ -3,9 +3,14 @@ package com.kentbiler.datastructures.map;
 public class HashMap<K, V> {
 
     private static final int DEFAULT_CAPACITY = 16;
+    private static final double LOAD_FACTOR = 0.75;
 
-    private final Entry<K, V>[] buckets;
+    private Entry<K, V>[] buckets;
     private int size;
+
+    int capacity() {
+        return buckets.length;
+    }
 
     public int size() {
         return size;
@@ -46,6 +51,11 @@ public class HashMap<K, V> {
             }
 
             current = current.next;
+        }
+
+        if (size + 1 > buckets.length * LOAD_FACTOR) {
+            resize();
+            index = bucketIndex(key);
         }
 
         Entry<K, V> newEntry = new Entry<>(key, value);
@@ -116,5 +126,25 @@ public class HashMap<K, V> {
         }
 
         size = 0;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void resize() {
+        Entry<K, V>[] oldBuckets = buckets;
+        buckets = (Entry<K, V>[]) new Entry[oldBuckets.length * 2];
+
+        for (Entry<K, V> bucket : oldBuckets) {
+            Entry<K, V> current = bucket;
+
+            while (current != null) {
+                Entry<K, V> next = current.next;
+
+                int newIndex = bucketIndex(current.key);
+                current.next = buckets[newIndex];
+                buckets[newIndex] = current;
+
+                current = next;
+            }
+        }
     }
 }
