@@ -24,4 +24,15 @@ class HashMapTest {
         assertEquals(1, map.size());
         assertEquals(1, map.get("Aristotle"));
     }
+
+    @Test
+    void putUpdatesExistingKeyWithoutIncreasingSize() {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        map.put("Aristotle", 1);
+        map.put("Aristotle", 2);
+
+        assertEquals(1, map.size());
+        assertEquals(2, map.get("Aristotle"));
+    }
 }
