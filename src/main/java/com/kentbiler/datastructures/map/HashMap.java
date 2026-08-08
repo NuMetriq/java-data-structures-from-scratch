@@ -84,4 +84,29 @@ public class HashMap<K, V> {
 
         return false;
     }
+
+    public V remove(K key) {
+        int index = bucketIndex(key);
+
+        Entry<K, V> current = buckets[index];
+        Entry<K, V> previous = null;
+
+        while (current != null) {
+            if (current.key.equals(key)) {
+                if (previous == null) {
+                    buckets[index] = current.next;
+                } else {
+                    previous.next = current.next;
+                }
+
+                size--;
+                return current.value;
+            }
+
+            previous = current;
+            current = current.next;
+        }
+
+        return null;
+    }
 }

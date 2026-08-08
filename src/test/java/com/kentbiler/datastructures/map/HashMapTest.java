@@ -87,4 +87,17 @@ class HashMapTest {
         assertTrue(map.containsKey("Aristotle"));
         assertFalse(map.containsKey("Menger"));
     }
+
+    @Test
+    void removeDeletesEntryAndReturnsValue() {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        map.put("Aristotle", 1);
+        map.put("Menger", 2);
+
+        assertEquals(1, map.remove("Aristotle"));
+        assertEquals(1, map.size());
+        assertFalse(map.containsKey("Aristotle"));
+        assertEquals(2, map.get("Menger"));
+    }
 }
