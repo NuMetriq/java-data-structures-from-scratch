@@ -2,6 +2,9 @@ package com.kentbiler.datastructures.map;
 
 public class HashMap<K, V> {
 
+    private static final int DEFAULT_CAPACITY = 16;
+
+    private final Entry<K, V>[] buckets;
     private int size;
 
     public int size() {
@@ -10,5 +13,50 @@ public class HashMap<K, V> {
 
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    private static class Entry<K, V> {
+        private final K key;
+        private V value;
+        private Entry<K, V> next;
+
+        private Entry(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public HashMap() {
+        buckets = (Entry<K, V>[]) new Entry[DEFAULT_CAPACITY];
+    }
+
+    private int bucketIndex(K key) {
+        return Math.floorMod(key.hashCode(), buckets.length);
+    }
+
+    public void put(K key, V value) {
+        int index = bucketIndex(key);
+
+        Entry<K, V> newEntry = new Entry<>(key, value);
+        newEntry.next = buckets[index];
+        buckets[index] = newEntry;
+
+        size++;
+    }
+
+    public V get(K key) {
+        int index = bucketIndex(key);
+        Entry<K, V> current = buckets[index];
+
+        while (current != null) {
+            if (current.key.equals(key)) {
+                return current.value;
+            }
+
+            current = current.next;
+        }
+
+        return null;
     }
 }

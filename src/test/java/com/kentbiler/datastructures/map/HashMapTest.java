@@ -14,4 +14,14 @@ class HashMapTest {
         assertTrue(map.isEmpty());
         assertEquals(0, map.size());
     }
+
+    @Test
+    void putStoresValueByKey() {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        map.put("Aristotle", 1);
+
+        assertEquals(1, map.size());
+        assertEquals(1, map.get("Aristotle"));
+    }
 }
