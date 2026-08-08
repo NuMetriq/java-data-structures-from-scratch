@@ -69,4 +69,19 @@ public class HashMap<K, V> {
 
         return null;
     }
+
+    public boolean containsKey(K key) {
+        int index = bucketIndex(key);
+        Entry<K, V> current = buckets[index];
+
+        while (current != null) {
+            if (current.key.equals(key)) {
+                return true;
+            }
+
+            current = current.next;
+        }
+
+        return false;
+    }
 }

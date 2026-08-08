@@ -3,6 +3,7 @@ package com.kentbiler.datastructures.map;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class HashMapTest {
@@ -75,5 +76,15 @@ class HashMapTest {
         assertEquals(2, map.size());
         assertEquals(1, map.get(first));
         assertEquals(2, map.get(second));
+    }
+
+    @Test
+    void containsKeyReportsWhetherKeyExists() {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        map.put("Aristotle", 1);
+
+        assertTrue(map.containsKey("Aristotle"));
+        assertFalse(map.containsKey("Menger"));
     }
 }
