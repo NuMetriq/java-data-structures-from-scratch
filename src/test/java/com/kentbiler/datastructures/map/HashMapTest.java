@@ -120,4 +120,21 @@ class HashMapTest {
         assertEquals(3, map.get(third));
         assertFalse(map.containsKey(second));
     }
+
+    @Test
+    void clearRemovesAllEntries() {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        map.put("Aristotle", 1);
+        map.put("Menger", 2);
+        map.put("Veatch", 3);
+
+        map.clear();
+
+        assertTrue(map.isEmpty());
+        assertEquals(0, map.size());
+        assertFalse(map.containsKey("Aristotle"));
+        assertFalse(map.containsKey("Menger"));
+        assertFalse(map.containsKey("Veatch"));
+    }
 }

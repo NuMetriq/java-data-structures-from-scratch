@@ -109,4 +109,12 @@ public class HashMap<K, V> {
 
         return null;
     }
+
+    public void clear() {
+        for (int i = 0; i < buckets.length; i++) {
+            buckets[i] = null;
+        }
+
+        size = 0;
+    }
 }
