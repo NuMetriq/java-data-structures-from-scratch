@@ -150,4 +150,19 @@ class HashMapTest {
 
         assertTrue(map.capacity() > initialCapacity);
     }
+
+    @Test
+    void resizingPreservesAllEntries() {
+        HashMap<Integer, String> map = new HashMap<>();
+
+        for (int i = 0; i < 100; i++) {
+            map.put(i, "Value " + i);
+        }
+
+        assertEquals(100, map.size());
+
+        for (int i = 0; i < 100; i++) {
+            assertEquals("Value " + i, map.get(i));
+        }
+    }
 }
