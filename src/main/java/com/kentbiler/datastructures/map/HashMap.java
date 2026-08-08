@@ -1,5 +1,7 @@
 package com.kentbiler.datastructures.map;
 
+import java.util.Objects;
+
 public class HashMap<K, V> {
 
     private static final int DEFAULT_CAPACITY = 16;
@@ -37,6 +39,7 @@ public class HashMap<K, V> {
     }
 
     private int bucketIndex(K key) {
+        Objects.requireNonNull(key, "Key cannot be null");
         return Math.floorMod(key.hashCode(), buckets.length);
     }
 

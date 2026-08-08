@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class HashMapTest {
@@ -164,5 +165,15 @@ class HashMapTest {
         for (int i = 0; i < 100; i++) {
             assertEquals("Value " + i, map.get(i));
         }
+    }
+
+    @Test
+    void rejectsNullKey() {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        assertThrows(NullPointerException.class, () -> map.put(null, 1));
+        assertThrows(NullPointerException.class, () -> map.get(null));
+        assertThrows(NullPointerException.class, () -> map.containsKey(null));
+        assertThrows(NullPointerException.class, () -> map.remove(null));
     }
 }
