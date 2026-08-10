@@ -176,4 +176,15 @@ class HashMapTest {
         assertThrows(NullPointerException.class, () -> map.containsKey(null));
         assertThrows(NullPointerException.class, () -> map.remove(null));
     }
+
+    @Test
+    void supportsNullValues() {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        map.put("Aristotle", null);
+
+        assertEquals(1, map.size());
+        assertTrue(map.containsKey("Aristotle"));
+        assertEquals(null, map.get("Aristotle"));
+    }
 }
