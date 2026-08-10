@@ -187,4 +187,17 @@ class HashMapTest {
         assertTrue(map.containsKey("Aristotle"));
         assertEquals(null, map.get("Aristotle"));
     }
+
+    @Test
+    void removeMissingKeyReturnsNullAndDoesNotChangeSize() {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        map.put("Aristotle", 1);
+        map.put("Menger", 2);
+
+        assertEquals(null, map.remove("Veatch"));
+        assertEquals(2, map.size());
+        assertTrue(map.containsKey("Aristotle"));
+        assertTrue(map.containsKey("Menger"));
+    }
 }
