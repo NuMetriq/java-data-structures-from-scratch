@@ -28,4 +28,16 @@ class BinarySearchTreeTest {
         assertTrue(tree.contains(5));
         assertTrue(tree.contains(15));
     }
+
+    @Test
+    void duplicateValuesDoNotIncreaseSize() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+
+        tree.add(10);
+        tree.add(10);
+        tree.add(10);
+
+        assertEquals(1, tree.size());
+        assertTrue(tree.contains(10));
+    }
 }
