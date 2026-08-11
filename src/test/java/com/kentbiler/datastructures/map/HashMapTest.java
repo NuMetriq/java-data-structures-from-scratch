@@ -200,4 +200,84 @@ class HashMapTest {
         assertTrue(map.containsKey("Aristotle"));
         assertTrue(map.containsKey("Menger"));
     }
+
+    @Test
+    void updatesExistingKeyAfterResize() {
+        HashMap<Integer, String> map = new HashMap<>();
+
+        for (int i = 0; i < 100; i++) {
+            map.put(i, "Value " + i);
+        }
+
+        map.put(42, "Updated");
+
+        assertEquals(100, map.size());
+        assertEquals("Updated", map.get(42));
+    }
+
+    @Test
+    void collisionsRemainCorrectAfterResize() {
+        HashMap<CollisionKey, Integer> map = new HashMap<>();
+
+        CollisionKey[] keys = new CollisionKey[100];
+
+        for (int i = 0; i < keys.length; i++) {
+            keys[i] = new CollisionKey("Key " + i);
+            map.put(keys[i], i);
+        }
+
+        assertEquals(100, map.size());
+
+        for (int i = 0; i < keys.length; i++) {
+            assertEquals(i, map.get(keys[i]));
+        }
+    }
+
+    @Test
+    void clearWorksAfterResize() {
+        HashMap<Integer, String> map = new HashMap<>();
+
+        for (int i = 0; i < 100; i++) {
+            map.put(i, "Value " + i);
+        }
+
+        map.clear();
+
+        assertTrue(map.isEmpty());
+        assertEquals(0, map.size());
+
+        for (int i = 0; i < 100; i++) {
+            assertFalse(map.containsKey(i));
+        }
+    }
+
+    @Test
+    void mapCanBeReusedAfterClear() {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        map.put("Aristotle", 1);
+        map.put("Menger", 2);
+
+        map.clear();
+
+        map.put("Veatch", 3);
+
+        assertEquals(1, map.size());
+        assertEquals(3, map.get("Veatch"));
+    }
+
+    @Test
+    void toStringContainsStoredEntries() {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        map.put("Aristotle", 1);
+        map.put("Menger", 2);
+
+        String result = map.toString();
+
+        assertTrue(result.startsWith("{"));
+        assertTrue(result.endsWith("}"));
+        assertTrue(result.contains("Aristotle=1"));
+        assertTrue(result.contains("Menger=2"));
+    }
 }

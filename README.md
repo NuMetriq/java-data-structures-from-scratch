@@ -119,3 +119,31 @@ Current features:
 - Fail-fast iterators
 - Constant-time operations at both ends
 - Empty-operation validation
+
+### HashMap
+
+A generic hash table implementation using separate chaining for collision resolution.
+
+Features:
+
+- Generic key and value types
+- `put`, `get`, `remove`, and `containsKey`
+- `size`, `isEmpty`, and `clear`
+- Existing-key updates without increasing size
+- Separate chaining for hash collisions
+- Automatic resizing at a 0.75 load factor
+- Rehashing when capacity increases
+- Null values supported
+- Null keys rejected
+- String representation
+
+Average-case complexity:
+
+| Operation | Average | Worst Case |
+|-----------|---------|------------|
+| `put` | O(1) | O(n) |
+| `get` | O(1) | O(n) |
+| `containsKey` | O(1) | O(n) |
+| `remove` | O(1) | O(n) |
+
+The worst case occurs when many keys collide into the same bucket.

@@ -10,18 +10,6 @@ public class HashMap<K, V> {
     private Entry<K, V>[] buckets;
     private int size;
 
-    int capacity() {
-        return buckets.length;
-    }
-
-    public int size() {
-        return size;
-    }
-
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
     private static class Entry<K, V> {
         private final K key;
         private V value;
@@ -38,9 +26,16 @@ public class HashMap<K, V> {
         buckets = (Entry<K, V>[]) new Entry[DEFAULT_CAPACITY];
     }
 
-    private int bucketIndex(K key) {
-        Objects.requireNonNull(key, "Key cannot be null");
-        return Math.floorMod(key.hashCode(), buckets.length);
+    public int size() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    int capacity() {
+        return buckets.length;
     }
 
     public void put(K key, V value) {
@@ -129,6 +124,37 @@ public class HashMap<K, V> {
         }
 
         size = 0;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("{");
+        boolean first = true;
+
+        for (Entry<K, V> bucket : buckets) {
+            Entry<K, V> current = bucket;
+
+            while (current != null) {
+                if (!first) {
+                    result.append(", ");
+                }
+
+                result.append(current.key)
+                      .append("=")
+                      .append(current.value);
+
+                first = false;
+                current = current.next;
+            }
+        }
+
+        result.append("}");
+        return result.toString();
+    }
+
+    private int bucketIndex(K key) {
+        Objects.requireNonNull(key, "Key cannot be null");
+        return Math.floorMod(key.hashCode(), buckets.length);
     }
 
     @SuppressWarnings("unchecked")
