@@ -1,5 +1,8 @@
 package com.kentbiler.datastructures.tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BinarySearchTree<T extends Comparable<T>> {
 
     private Node<T> root;
@@ -73,5 +76,21 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
 
         return false;
+    }
+
+    public List<T> inOrder() {
+        List<T> values = new ArrayList<>();
+        inOrder(root, values);
+        return values;
+    }
+
+    private void inOrder(Node<T> node, List<T> values) {
+        if (node == null) {
+            return;
+        }
+
+        inOrder(node.left, values);
+        values.add(node.value);
+        inOrder(node.right, values);
     }
 }

@@ -40,4 +40,20 @@ class BinarySearchTreeTest {
         assertEquals(1, tree.size());
         assertTrue(tree.contains(10));
     }
+
+    @Test
+    void inOrderTraversalReturnsValuesInSortedOrder() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+
+        tree.add(10);
+        tree.add(5);
+        tree.add(15);
+        tree.add(3);
+        tree.add(7);
+
+        assertEquals(
+            java.util.List.of(3, 5, 7, 10, 15),
+            tree.inOrder()
+        );
+    }
 }
